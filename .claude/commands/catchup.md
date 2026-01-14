@@ -1,38 +1,67 @@
 # Catch Up on Context
 
-Read all uncommitted changes and recent work into the conversation context. Use this after `/clear` to restore working context.
+Read project status and recent work to restore working context. Use this at the start of a new session or after `/clear`.
 
 ## Steps
 
-1. Show current git status:
-   ```bash
-   git status
-   ```
+### 1. Read Project Status (Primary Context)
 
-2. If there are uncommitted changes, read the diffs:
-   ```bash
-   git diff
-   git diff --cached
-   ```
+**Always start here first:**
 
-3. Show recent commits (last 5):
-   ```bash
-   git log --oneline -5
-   ```
+```
+Read STATUS.md at project root
+```
 
-4. Read any recently modified files in key directories:
-   ```bash
-   find src/content -mtime -1 -type f
-   find src/components -mtime -1 -type f
-   ```
+This file contains:
 
-5. Summarize:
-   - What files have been changed
-   - What the changes appear to be doing
-   - Any work in progress that seems incomplete
+- Current phase and what's complete
+- What we just finished in the last session
+- Immediate next steps
+- Known issues and technical debt
+- Phase 2+ backlog
 
-6. Ask if there's a specific area to focus on.
+### 2. Check Git Status
+
+```bash
+git status
+```
+
+### 3. Review Recent Commits (last 5)
+
+```bash
+git log --oneline -5
+```
+
+### 4. If Uncommitted Changes Exist
+
+```bash
+git diff              # Working directory changes
+git diff --cached     # Staged changes
+```
+
+### 5. Check Recently Modified Files (if needed)
+
+```bash
+find src/content -mtime -1 -type f     # Content modified in last 24h
+find src/components -mtime -1 -type f  # Components modified in last 24h
+```
+
+### 6. Summarize for User
+
+Based on STATUS.md and git status:
+
+- **Current state:** What phase/milestone we're at
+- **Last session:** What was just completed
+- **Next up:** Immediate priorities from STATUS.md
+- **Any blockers:** Technical debt or issues to address
+
+### 7. Ask Focus Question
+
+"Based on STATUS.md, the immediate next steps are [X, Y, Z]. Which would you like to tackle first?"
 
 ## Notes
 
-This command is useful after clearing context to avoid losing track of work in progress. It's also helpful at the start of a new session to quickly understand the current state.
+- **STATUS.md is the source of truth** for project state
+- Detailed session history lives in `~/Documents/main-vault/Sessions/`
+- This command helps you pick up exactly where the last session left off
+- Update STATUS.md at the end of each session to keep it current

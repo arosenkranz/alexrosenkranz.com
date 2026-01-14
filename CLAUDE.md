@@ -2,15 +2,25 @@
 
 Personal website and digital garden built with Astro, deployed on Cloudflare Pages.
 
+## Session Continuity
+
+**IMPORTANT**: At the start of each session, read `STATUS.md` at project root for current state and next steps.
+
+- **Quick Start:** Run `/catchup` command to read STATUS.md and git status
+- **Current Phase:** See STATUS.md for what's complete and what's next
+- **Detailed History:** Session logs in `~/Documents/main-vault/Sessions/`
+
 ## Documentation First
 
 **IMPORTANT**: Before generating any code, ALWAYS read and reference the relevant documentation in the `/docs` directory first. These docs contain project-specific patterns, conventions, and requirements that must be followed.
 
 Current docs:
+
 - `docs/component-patterns.md` - Reference for component patterns in this project
 - `docs/content-authoring.md` - Reference for writing content
 
-## Commands 
+## Commands
+
 ```bash
 # Development
 pnpm dev              # Start dev server (localhost:4321)
@@ -67,37 +77,44 @@ functions/
 ## Content Types
 
 ### Posts (`src/content/posts/`)
+
 Quick items with tags. Filename format: `YYYY-MM-DD-slug.md`
 
 Valid tags: `article`, `photo`, `product`, `code`, `music`, `video`, `quote`, `note`, `website`, `app`, `movie`, `tv`
 
 ### Digests (`src/content/digests/`)
+
 Weekly rollups. Filename format: `YYYY-wWW.md`
 
 ### Articles (`src/content/articles/`)
+
 Long-form posts. Filename: `slug.md`
 
 ## Coding Conventions
 
 ### General
+
 - Use TypeScript for all `.ts` and `.tsx` files
 - Prefer Astro components (`.astro`) for static content
 - Use React components (`.tsx`) only when client-side interactivity is needed
 - Path aliases: `@/*` maps to `src/*`
 
 ### Styling
+
 - Use Tailwind utility classes
 - Use `cn()` helper for conditional classes
 - Follow shadcn/ui patterns for component styling
 - Dark mode: use `dark:` variant, system preference is default
 
 ### Components
+
 - shadcn/ui components live in `src/components/ui/`
 - Don't modify shadcn components directly; extend with wrapper components
 - Use `client:load` for components needing immediate interactivity
 - Use `client:visible` for below-fold interactive components
 
 ### Content
+
 - All content uses Astro Content Collections with Zod schemas
 - Frontmatter is type-checked at build time
 - Images in content should use relative paths
@@ -105,6 +122,7 @@ Long-form posts. Filename: `slug.md`
 ## Datadog Integration
 
 RUM is initialized in `BaseLayout.astro`. Key events to track:
+
 - `post.view`, `post.external_link`
 - `tag.filter`
 - `article.view`, `article.scroll_depth`
@@ -116,6 +134,7 @@ Cloudflare Worker logs go to Datadog via HTTP API.
 ## Environment Variables
 
 Required in Cloudflare dashboard:
+
 - `SPOTIFY_CLIENT_ID`
 - `SPOTIFY_CLIENT_SECRET`
 - `SPOTIFY_REFRESH_TOKEN`
@@ -126,17 +145,21 @@ Required in Cloudflare dashboard:
 ## Common Tasks
 
 ### Adding a new post
+
 1. Create file: `src/content/posts/YYYY-MM-DD-slug.md`
 2. Add frontmatter with title, publishedAt, tags
 3. Optionally add body content
 
 ### Adding a shadcn component
+
 ```bash
 pnpm dlx shadcn@latest add [component-name]
 ```
 
 ### Testing the Spotify endpoint locally
+
 The Cloudflare Worker needs wrangler for local dev:
+
 ```bash
 pnpm wrangler dev functions/api/spotify/now-playing.ts
 ```
