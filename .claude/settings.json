@@ -1,0 +1,55 @@
+{
+  "permissions": {
+    "allowedTools": [
+      "Read",
+      "Write",
+      "Edit",
+      "Bash(pnpm *)",
+      "Bash(git *)",
+      "Bash(wrangler *)",
+      "Bash(npx *)",
+      "Bash(curl *)",
+      "Glob",
+      "Grep"
+    ],
+    "deny": [
+      "Read(.env)",
+      "Read(.env.*)",
+      "Read(.dev.vars)",
+      "Write(.env)",
+      "Write(.env.*)",
+      "Write(.dev.vars)"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write(*.ts)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "pnpm eslint --fix $file"
+          }
+        ]
+      },
+      {
+        "matcher": "Write(*.tsx)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "pnpm eslint --fix $file"
+          }
+        ]
+      },
+      {
+        "matcher": "Write(*.astro)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "pnpm prettier --write $file"
+          }
+        ]
+      }
+    ]
+  }
+}

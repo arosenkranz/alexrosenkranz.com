@@ -1,0 +1,53 @@
+---
+const currentPath = Astro.url.pathname;
+
+const navItems = [
+  { href: '/stream', label: 'Stream' },
+  { href: '/now', label: 'Now' },
+  { href: '/about', label: 'About' },
+  { href: '/writing', label: 'Writing', disabled: true },
+  { href: '/digests', label: 'Digests', disabled: true },
+];
+---
+
+<header class="border-b border-border bg-background">
+  <div class="mx-auto max-w-5xl px-4 py-6 sm:px-6 lg:px-8">
+    <nav class="flex items-center justify-between">
+      <!-- Logo/Name -->
+      <a
+        href="/"
+        class="text-xl font-semibold text-foreground no-underline hover:text-primary"
+      >
+        Alex Rosenkranz
+      </a>
+
+      <!-- Navigation Links -->
+      <ul class="flex items-center gap-6">
+        {
+          navItems.map((item) => (
+            <li>
+              {item.disabled ? (
+                <span class="text-sm text-muted-foreground">
+                  {item.label}
+                  <span class="ml-1 text-xs">(soon)</span>
+                </span>
+              ) : (
+                <a
+                  href={item.href}
+                  class:list={[
+                    'text-sm transition-colors no-underline hover:text-primary',
+                    currentPath === item.href || currentPath === '/'
+                      ? 'text-foreground font-medium'
+                      : 'text-muted-foreground',
+                  ]}
+                >
+                  {item.label}
+                </a>
+              )}
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+</header>

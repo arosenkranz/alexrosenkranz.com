@@ -1,0 +1,95 @@
+---
+import '@/styles/globals.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Alex Rosenkranz',
+  description = 'Personal website and digital garden',
+} = Astro.props;
+
+const siteUrl = 'https://alexrosenkranz.com';
+const canonicalURL = new URL(Astro.url.pathname, siteUrl);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- SEO Meta Tags -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:site_name" content="Alex Rosenkranz" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Dark Mode Script (prevents FOUC) -->
+    <script is:inline>
+      // Check for saved theme preference or default to system preference
+      const getTheme = () => {
+        if (typeof localStorage !== 'undefined') {
+          const saved = localStorage.getItem('theme');
+          if (saved) return saved;
+        }
+        return window.matchMedia('(prefers-color-scheme: dark)').matches
+          ? 'dark'
+          : 'light';
+      };
+
+      const theme = getTheme();
+      document.documentElement.classList.toggle('dark', theme === 'dark');
+    </script>
+
+    <!--
+      TODO: Datadog RUM Initialization
+      Will be added in later phase with credentials:
+
+      <script>
+        import { datadogRum } from '@datadog/browser-rum';
+
+        datadogRum.init({
+          applicationId: '<APP_ID>',
+          clientToken: '<CLIENT_TOKEN>',
+          site: 'datadoghq.com',
+          service: 'alexrosenkranz-web',
+          env: 'production',
+          version: '1.0.0',
+          sessionSampleRate: 100,
+          sessionReplaySampleRate: 20,
+          trackUserInteractions: true,
+          trackResources: true,
+          trackLongTasks: true,
+          defaultPrivacyLevel: 'mask-user-input',
+        });
+      </script>
+    -->
+  </head>
+  <body class="antialiased">
+    <slot />
+  </body>
+</html>

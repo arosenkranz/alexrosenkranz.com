@@ -1,0 +1,58 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import PostCard from '@/components/PostCard.astro';
+
+// Get all posts, filter drafts, and sort by date
+const allPosts = await getCollection('posts');
+const posts = allPosts
+  .filter((post) => !post.data.draft)
+  .sort((a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime());
+
+// Get unique tags for future filtering UI
+const allTags = [
+  ...new Set(posts.flatMap((post) => post.data.tags)),
+].sort();
+---
+
+<BaseLayout
+  title="Stream - Alex Rosenkranz"
+  description="All posts in reverse chronological order."
+>
+  <Header />
+
+  <main class="mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:px-8">
+    <!-- Page Header -->
+    <div class="mb-12">
+      <h1 class="mb-4 text-4xl font-bold tracking-tight text-foreground">
+        Stream
+      </h1>
+      <p class="text-lg leading-relaxed text-muted-foreground">
+        All {posts.length} posts, newest first.
+      </p>
+
+      <!-- TODO: Tag filter UI (non-functional for MVP) -->
+      <div class="mt-6 flex flex-wrap gap-2">
+        {
+          allTags.map((tag) => (
+            <button
+              class="rounded-full border border-border bg-background px-3 py-1 text-sm text-muted-foreground transition-colors hover:bg-muted"
+              disabled
+            >
+              {tag}
+            </button>
+          ))
+        }
+      </div>
+    </div>
+
+    <!-- Posts Grid -->
+    <div class="grid gap-6 sm:grid-cols-2">
+      {posts.map((post) => <PostCard post={post} />)}
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>

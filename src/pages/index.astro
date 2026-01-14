@@ -1,0 +1,50 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import PostCard from '@/components/PostCard.astro';
+
+// Get all posts, filter drafts, and sort by date
+const allPosts = await getCollection('posts');
+const posts = allPosts
+  .filter((post) => !post.data.draft)
+  .sort((a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime());
+---
+
+<BaseLayout
+  title="Alex Rosenkranz - Stream"
+  description="A stream of things I find interesting: articles, music, code, and more."
+>
+  <Header />
+
+  <main class="mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:px-8">
+    <!-- Introduction -->
+    <div class="mb-12">
+      <h1 class="mb-4 text-4xl font-bold tracking-tight text-foreground">
+        Stream
+      </h1>
+      <p class="text-lg leading-relaxed text-muted-foreground">
+        A collection of things I find interesting—articles I'm reading, music
+        I'm listening to, projects I'm working on, and thoughts I'm thinking.
+        Updated frequently.
+      </p>
+    </div>
+
+    <!-- Posts Grid -->
+    <div class="grid gap-6 sm:grid-cols-2">
+      {posts.map((post) => <PostCard post={post} />)}
+    </div>
+
+    <!-- Empty State -->
+    {
+      posts.length === 0 && (
+        <div class="rounded-lg border border-border bg-card p-12 text-center">
+          <p class="text-muted-foreground">No posts yet. Check back soon!</p>
+        </div>
+      )
+    }
+  </main>
+
+  <Footer />
+</BaseLayout>

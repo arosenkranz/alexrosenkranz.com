@@ -1,0 +1,81 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+
+const lastUpdated = 'January 13, 2025';
+---
+
+<BaseLayout
+  title="Now - Alex Rosenkranz"
+  description="What I'm up to right now."
+>
+  <Header />
+
+  <main class="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
+    <article class="prose prose-lg dark:prose-invert">
+      <h1>What I'm doing now</h1>
+
+      <p class="text-sm text-muted-foreground">
+        Last updated: {lastUpdated}
+      </p>
+
+      <p>
+        This is a <a
+          href="https://nownownow.com/about"
+          target="_blank"
+          rel="noopener noreferrer">now page</a
+        >—a snapshot of what I'm currently focused on.
+      </p>
+
+      <h2>Projects</h2>
+
+      <ul>
+        <li>
+          <strong>Personal Website Rebuild:</strong> Building this site with Astro,
+          Tailwind CSS, and Cloudflare Pages. Implementing a stream-based content
+          model for quick posts and longer articles.
+        </li>
+        <li>
+          <strong>Homelab Setup:</strong> Running Home Assistant and Music Assistant
+          on a Raspberry Pi 5, with various Docker services monitored by Datadog.
+        </li>
+      </ul>
+
+      <h2>Learning</h2>
+
+      <ul>
+        <li>Astro framework and static site generation patterns</li>
+        <li>Self-hosting services and Linux administration</li>
+        <li>Terraform for infrastructure as code</li>
+        <li>AWS cloud fundamentals</li>
+      </ul>
+
+      <h2>Reading</h2>
+
+      <ul>
+        <li>Various articles on web performance and observability</li>
+        <li>Technical documentation for homelab projects</li>
+      </ul>
+
+      <h2>Work</h2>
+
+      <p>
+        Working at Datadog on observability and developer tools. Focused on
+        making complex systems easier to understand and debug.
+      </p>
+
+      <hr />
+
+      <p class="text-sm text-muted-foreground">
+        Inspired by Derek Sivers' <a
+          href="https://nownownow.com"
+          target="_blank"
+          rel="noopener noreferrer">/now</a
+        > movement. This page is updated monthly or whenever things change significantly.
+      </p>
+    </article>
+  </main>
+
+  <Footer />
+</BaseLayout>

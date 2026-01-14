@@ -1,0 +1,147 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Core colors */
+    --background: 0 0% 100%; /* #ffffff */
+    --foreground: 222 47% 11%; /* #111827 */
+
+    /* Card/surface colors */
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+
+    /* Popover colors */
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    /* Primary (accent) */
+    --primary: 221 83% 53%; /* #2563eb */
+    --primary-foreground: 210 40% 98%;
+
+    /* Secondary */
+    --secondary: 210 40% 96%; /* #f9fafb */
+    --secondary-foreground: 222 47% 11%;
+
+    /* Muted */
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%; /* #6b7280 */
+
+    /* Accent */
+    --accent: 210 40% 96%;
+    --accent-foreground: 222 47% 11%;
+
+    /* Destructive */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    /* Border/input/ring */
+    --border: 214 32% 91%; /* #e5e7eb */
+    --input: 214 32% 91%;
+    --ring: 221 83% 53%;
+
+    /* Border radius */
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    /* Core colors */
+    --background: 0 0% 4%; /* #0a0a0a */
+    --foreground: 210 40% 98%; /* #f9fafb */
+
+    /* Card/surface colors */
+    --card: 0 0% 9%; /* #171717 */
+    --card-foreground: 210 40% 98%;
+
+    /* Popover colors */
+    --popover: 0 0% 9%;
+    --popover-foreground: 210 40% 98%;
+
+    /* Primary (accent) */
+    --primary: 217 91% 60%; /* #3b82f6 */
+    --primary-foreground: 222 47% 11%;
+
+    /* Secondary */
+    --secondary: 0 0% 9%;
+    --secondary-foreground: 210 40% 98%;
+
+    /* Muted */
+    --muted: 0 0% 15%; /* #262626 */
+    --muted-foreground: 215 20% 65%; /* #9ca3af */
+
+    /* Accent */
+    --accent: 0 0% 15%;
+    --accent-foreground: 210 40% 98%;
+
+    /* Destructive */
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 210 40% 98%;
+
+    /* Border/input/ring */
+    --border: 0 0% 15%; /* #262626 */
+    --input: 0 0% 15%;
+    --ring: 217 91% 60%;
+  }
+}
+
+@layer base {
+  * {
+    border-color: hsl(var(--border));
+  }
+
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-feature-settings: 'rlig' 1, 'calt' 1;
+  }
+
+  /* Typography base styles */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: theme('fontFamily.sans');
+    font-weight: 600;
+    letter-spacing: -0.025em;
+  }
+
+  h1 {
+    font-size: 1.875rem;
+    line-height: 1.25;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    line-height: 1.25;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+    line-height: 1.5;
+  }
+
+  p {
+    line-height: 1.75;
+  }
+
+  a {
+    color: hsl(var(--primary));
+    text-underline-offset: 4px;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  code {
+    position: relative;
+    border-radius: 0.25rem;
+    background-color: hsl(var(--muted));
+    padding: 0.2rem 0.3rem;
+    font-family: theme('fontFamily.mono');
+    font-size: 0.875rem;
+  }
+}

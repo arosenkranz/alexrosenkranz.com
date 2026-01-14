@@ -1,0 +1,10 @@
+# Cloudflare Workers configuration
+# Will be configured in later phases for Spotify Worker and Digest Generator
+
+name = "alexrosenkranz-com"
+main = "functions/api/spotify/now-playing.ts"
+compatibility_date = "2025-01-13"
+
+# Environment variables will be set via Cloudflare dashboard
+# [env.production]
+# vars = { }

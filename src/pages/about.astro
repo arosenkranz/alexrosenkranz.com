@@ -1,0 +1,65 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+---
+
+<BaseLayout
+  title="About - Alex Rosenkranz"
+  description="A bit about me and this site."
+>
+  <Header />
+
+  <main class="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
+    <article class="prose prose-lg dark:prose-invert">
+      <h1>About</h1>
+
+      <p>
+        Hi, I'm Alex. I work at Datadog and spend my time thinking about
+        observability, developer tools, and building things on the web.
+      </p>
+
+      <p>
+        This site is my digital garden—a place to collect things I find
+        interesting, share what I'm learning, and document projects I'm working
+        on. It's not career-focused or particularly polished. Just a personal
+        corner of the internet.
+      </p>
+
+      <h2>What I'm up to</h2>
+
+      <p>
+        Right now, I'm exploring self-hosting, building a homelab with a
+        Raspberry Pi, and learning more about cloud infrastructure (AWS,
+        Terraform, etc.). I'm also interested in creative coding with tools like
+        P5.js and Three.js.
+      </p>
+
+      <p>
+        Check out my <a href="/now">now page</a> for what I'm currently focused on.
+      </p>
+
+      <h2>About this site</h2>
+
+      <p>
+        Built with <a
+          href="https://astro.build"
+          target="_blank"
+          rel="noopener noreferrer">Astro</a
+        >, styled with <a
+          href="https://tailwindcss.com"
+          target="_blank"
+          rel="noopener noreferrer">Tailwind CSS</a
+        >, and deployed on Cloudflare Pages. The source code is available on <a
+          href="https://github.com/alexrosenkranz/alexrosenkranz.com"
+          target="_blank"
+          rel="noopener noreferrer">GitHub</a
+        >.
+      </p>
+
+      <p>More content coming soon.</p>
+    </article>
+  </main>
+
+  <Footer />
+</BaseLayout>
