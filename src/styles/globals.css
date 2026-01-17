@@ -1,99 +1,148 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
-@layer base {
-  :root {
-    /* Core colors */
-    --background: 0 0% 100%; /* #ffffff */
-    --foreground: 222 47% 11%; /* #111827 */
+:root {
+  /* Core colors */
+  --background: hsl(0 0% 100%); /* #ffffff */
+  --foreground: hsl(222 47% 11%); /* #111827 */
 
-    /* Card/surface colors */
-    --card: 0 0% 100%;
-    --card-foreground: 222 47% 11%;
+  /* Card/surface colors */
+  --card: hsl(0 0% 100%);
+  --card-foreground: hsl(222 47% 11%);
 
-    /* Popover colors */
-    --popover: 0 0% 100%;
-    --popover-foreground: 222 47% 11%;
+  /* Popover colors */
+  --popover: hsl(0 0% 100%);
+  --popover-foreground: hsl(222 47% 11%);
 
-    /* Primary (accent) */
-    --primary: 221 83% 53%; /* #2563eb */
-    --primary-foreground: 210 40% 98%;
+  /* Primary (accent) */
+  --primary: hsl(221 83% 53%); /* #2563eb */
+  --primary-foreground: hsl(210 40% 98%);
 
-    /* Secondary */
-    --secondary: 210 40% 96%; /* #f9fafb */
-    --secondary-foreground: 222 47% 11%;
+  /* Secondary */
+  --secondary: hsl(210 40% 96%); /* #f9fafb */
+  --secondary-foreground: hsl(222 47% 11%);
 
-    /* Muted */
-    --muted: 210 40% 96%;
-    --muted-foreground: 215 16% 47%; /* #6b7280 */
+  /* Muted */
+  --muted: hsl(210 40% 96%);
+  --muted-foreground: hsl(215 16% 47%); /* #6b7280 */
 
-    /* Accent */
-    --accent: 210 40% 96%;
-    --accent-foreground: 222 47% 11%;
+  /* Accent */
+  --accent: hsl(210 40% 96%);
+  --accent-foreground: hsl(222 47% 11%);
 
-    /* Destructive */
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 210 40% 98%;
+  /* Destructive */
+  --destructive: hsl(0 84% 60%);
+  --destructive-foreground: hsl(210 40% 98%);
 
-    /* Border/input/ring */
-    --border: 214 32% 91%; /* #e5e7eb */
-    --input: 214 32% 91%;
-    --ring: 221 83% 53%;
+  /* Border/input/ring */
+  --border: hsl(214 32% 91%); /* #e5e7eb */
+  --input: hsl(214 32% 91%);
+  --ring: hsl(221 83% 53%);
 
-    /* Border radius */
-    --radius: 0.5rem;
-  }
+  /* Border radius */
+  --radius: 0.5rem;
+}
 
-  .dark {
-    /* Core colors */
-    --background: 0 0% 4%; /* #0a0a0a */
-    --foreground: 210 40% 98%; /* #f9fafb */
+.dark {
+  /* Core colors */
+  --background: hsl(0 0% 4%); /* #0a0a0a */
+  --foreground: hsl(210 40% 98%); /* #f9fafb */
 
-    /* Card/surface colors */
-    --card: 0 0% 9%; /* #171717 */
-    --card-foreground: 210 40% 98%;
+  /* Card/surface colors */
+  --card: hsl(0 0% 9%); /* #171717 */
+  --card-foreground: hsl(210 40% 98%);
 
-    /* Popover colors */
-    --popover: 0 0% 9%;
-    --popover-foreground: 210 40% 98%;
+  /* Popover colors */
+  --popover: hsl(0 0% 9%);
+  --popover-foreground: hsl(210 40% 98%);
 
-    /* Primary (accent) */
-    --primary: 217 91% 60%; /* #3b82f6 */
-    --primary-foreground: 222 47% 11%;
+  /* Primary (accent) */
+  --primary: hsl(217 91% 60%); /* #3b82f6 */
+  --primary-foreground: hsl(222 47% 11%);
 
-    /* Secondary */
-    --secondary: 0 0% 9%;
-    --secondary-foreground: 210 40% 98%;
+  /* Secondary */
+  --secondary: hsl(0 0% 9%);
+  --secondary-foreground: hsl(210 40% 98%);
 
-    /* Muted */
-    --muted: 0 0% 15%; /* #262626 */
-    --muted-foreground: 215 20% 65%; /* #9ca3af */
+  /* Muted */
+  --muted: hsl(0 0% 15%); /* #262626 */
+  --muted-foreground: hsl(215 20% 65%); /* #9ca3af */
 
-    /* Accent */
-    --accent: 0 0% 15%;
-    --accent-foreground: 210 40% 98%;
+  /* Accent */
+  --accent: hsl(0 0% 15%);
+  --accent-foreground: hsl(210 40% 98%);
 
-    /* Destructive */
-    --destructive: 0 62% 30%;
-    --destructive-foreground: 210 40% 98%;
+  /* Destructive */
+  --destructive: hsl(0 62% 30%);
+  --destructive-foreground: hsl(210 40% 98%);
 
-    /* Border/input/ring */
-    --border: 0 0% 15%; /* #262626 */
-    --input: 0 0% 15%;
-    --ring: 217 91% 60%;
-  }
+  /* Border/input/ring */
+  --border: hsl(0 0% 15%); /* #262626 */
+  --input: hsl(0 0% 15%);
+  --ring: hsl(217 91% 60%);
+}
+
+/* Register colors with Tailwind v4 */
+@theme inline {
+  /* Core colors */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  /* Card colors */
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  /* Popover colors */
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  /* Primary colors */
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  /* Secondary colors */
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  /* Muted colors */
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  /* Accent colors */
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  /* Destructive colors */
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  /* Border/input/ring */
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Border radius */
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  /* Fonts */
+  --font-sans:
+    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
 }
 
 @layer base {
   * {
-    border-color: hsl(var(--border));
+    border-color: var(--border);
   }
 
   body {
-    background-color: hsl(var(--background));
-    color: hsl(var(--foreground));
-    font-feature-settings: 'rlig' 1, 'calt' 1;
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    font-feature-settings:
+      'rlig' 1,
+      'calt' 1;
   }
 
   /* Typography base styles */
@@ -103,7 +152,7 @@
   h4,
   h5,
   h6 {
-    font-family: theme('fontFamily.sans');
+    font-family: var(--font-sans);
     font-weight: 600;
     letter-spacing: -0.025em;
   }
@@ -128,7 +177,7 @@
   }
 
   a {
-    color: hsl(var(--primary));
+    color: var(--primary);
     text-underline-offset: 4px;
   }
 
@@ -139,9 +188,9 @@
   code {
     position: relative;
     border-radius: 0.25rem;
-    background-color: hsl(var(--muted));
+    background-color: var(--muted);
     padding: 0.2rem 0.3rem;
-    font-family: theme('fontFamily.mono');
+    font-family: var(--font-mono);
     font-size: 0.875rem;
   }
 }

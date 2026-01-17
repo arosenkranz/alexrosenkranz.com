@@ -5,6 +5,7 @@ Review all uncommitted changes before committing. Check for issues that linters 
 ## Steps
 
 1. Get the list of changed files:
+
    ```bash
    git status --porcelain
    ```
@@ -12,6 +13,7 @@ Review all uncommitted changes before committing. Check for issues that linters 
 2. For each changed file, review for:
 
 ### Code Quality
+
 - Hardcoded values that should be constants or env vars
 - TODO/FIXME comments that shouldn't be committed
 - Console.log statements left in
@@ -19,17 +21,20 @@ Review all uncommitted changes before committing. Check for issues that linters 
 - Overly complex functions that should be split
 
 ### TypeScript Specific
+
 - Any `any` types that could be more specific
 - Missing error handling in async functions
 - Unused imports or variables
 
 ### Content (Markdown)
+
 - Spelling/grammar issues in titles and descriptions
 - Missing required frontmatter fields
 - Invalid tag names
 - Broken relative links
 
 ### Security
+
 - Secrets or API keys accidentally included
 - Sensitive data in comments
 

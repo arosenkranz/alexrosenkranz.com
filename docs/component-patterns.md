@@ -30,26 +30,28 @@ const formattedDate = publishedAt.toLocaleDateString('en-US', {
 ---
 
 <article class={cn('border-b border-border py-6', className)}>
-  <div class="flex items-center justify-between text-sm text-muted-foreground mb-2">
+  <div
+    class="text-muted-foreground mb-2 flex items-center justify-between text-sm"
+  >
     <div class="flex gap-2">
-      {tags.map((tag) => (
-        <Badge variant="secondary">{tag}</Badge>
-      ))}
+      {tags.map((tag) => <Badge variant="secondary">{tag}</Badge>)}
     </div>
     <time datetime={publishedAt.toISOString()}>{formattedDate}</time>
   </div>
-  
+
   <h2 class="text-lg font-medium">
-    {url ? (
-      <a href={url} class="hover:text-primary" target="_blank" rel="noopener">
-        {title}
-        <span class="text-muted-foreground ml-2">→</span>
-      </a>
-    ) : (
-      title
-    )}
+    {
+      url ? (
+        <a href={url} class="hover:text-primary" target="_blank" rel="noopener">
+          {title}
+          <span class="text-muted-foreground ml-2">→</span>
+        </a>
+      ) : (
+        title
+      )
+    }
   </h2>
-  
+
   <slot />
 </article>
 ```
@@ -80,7 +82,7 @@ const { title, description, image } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <SEO title={title} description={description} image={image} />
   </head>
-  <body class="min-h-screen bg-background text-foreground">
+  <body class="bg-background text-foreground min-h-screen">
     <Header />
     <main class="container mx-auto px-4 py-8">
       <slot />
@@ -113,7 +115,7 @@ export function TagFilter({ tags, initialTag, onTagChange }: TagFilterProps) {
     const newTag = activeTag === tag ? null : tag;
     setActiveTag(newTag);
     onTagChange?.(newTag);
-    
+
     // Update URL without page reload
     const url = new URL(window.location.href);
     if (newTag) {
@@ -181,7 +183,9 @@ export function NowPlaying() {
     };
 
     const startPolling = () => {
-      const interval = data?.isPlaying ? POLL_INTERVAL_ACTIVE : POLL_INTERVAL_IDLE;
+      const interval = data?.isPlaying
+        ? POLL_INTERVAL_ACTIVE
+        : POLL_INTERVAL_IDLE;
       intervalId = window.setInterval(fetchNowPlaying, interval);
     };
 
@@ -218,11 +222,16 @@ export function NowPlaying() {
       target="_blank"
       rel="noopener noreferrer"
       className={cn(
-        'flex items-center gap-3 text-sm text-muted-foreground',
+        'text-muted-foreground flex items-center gap-3 text-sm',
         'hover:text-foreground transition-colors'
       )}
     >
-      <span className={cn('w-2 h-2 rounded-full', data.isPlaying ? 'bg-green-500 animate-pulse' : 'bg-muted')} />
+      <span
+        className={cn(
+          'h-2 w-2 rounded-full',
+          data.isPlaying ? 'animate-pulse bg-green-500' : 'bg-muted'
+        )}
+      />
       <span>
         {data.isPlaying ? 'Now playing' : 'Recently played'}:{' '}
         <span className="text-foreground">{data.title}</span>
@@ -253,21 +262,23 @@ const initialTag = url.searchParams.get('tag');
 ---
 
 <BaseLayout title="Stream">
-  <h1 class="text-3xl font-bold mb-8">Stream</h1>
-  
+  <h1 class="mb-8 text-3xl font-bold">Stream</h1>
+
   <!-- React component with client:load for immediate interactivity -->
   <TagFilter client:load tags={allTags} initialTag={initialTag} />
-  
+
   <div class="mt-8">
-    {posts.map((post) => (
-      <PostCard
-        title={post.data.title}
-        publishedAt={post.data.publishedAt}
-        tags={post.data.tags}
-        url={post.data.url}
-        data-tags={post.data.tags.join(',')}
-      />
-    ))}
+    {
+      posts.map((post) => (
+        <PostCard
+          title={post.data.title}
+          publishedAt={post.data.publishedAt}
+          tags={post.data.tags}
+          url={post.data.url}
+          data-tags={post.data.tags.join(',')}
+        />
+      ))
+    }
   </div>
 </BaseLayout>
 

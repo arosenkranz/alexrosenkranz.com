@@ -15,12 +15,12 @@ const primaryTag = tags[0];
 ---
 
 <article
-  class="group rounded-lg border border-border bg-card p-6 transition-shadow hover:shadow-md"
+  class="group border-border bg-card rounded-lg border p-6 transition-shadow hover:shadow-md"
 >
   <!-- Header: Tag and Date -->
   <div class="mb-3 flex items-center justify-between text-xs">
     <span
-      class="rounded-full bg-muted px-2 py-1 font-medium text-muted-foreground"
+      class="bg-muted text-muted-foreground rounded-full px-2 py-1 font-medium"
     >
       {primaryTag}
     </span>
@@ -30,14 +30,14 @@ const primaryTag = tags[0];
   </div>
 
   <!-- Title -->
-  <h3 class="mb-2 text-lg font-semibold text-foreground">
+  <h3 class="text-foreground mb-2 text-lg font-semibold">
     {title}
   </h3>
 
   <!-- Body Content (if present) -->
   {
     hasBody && (
-      <div class="prose prose-sm mb-4 text-muted-foreground">
+      <div class="prose prose-sm text-muted-foreground mb-4">
         <p class="line-clamp-3">{post.body}</p>
       </div>
     )
@@ -50,7 +50,7 @@ const primaryTag = tags[0];
         href={url}
         target="_blank"
         rel="noopener noreferrer"
-        class="inline-flex items-center gap-1 text-sm text-primary no-underline hover:underline"
+        class="text-primary inline-flex items-center gap-1 text-sm no-underline hover:underline"
       >
         <span>→</span>
         <span>{new URL(url).hostname}</span>

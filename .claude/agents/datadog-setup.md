@@ -22,6 +22,7 @@ You are a Datadog observability expert, specializing in:
 ## Context Discovery
 
 When invoked, first check:
+
 - `src/lib/datadog.ts` for existing initialization
 - `src/layouts/BaseLayout.astro` for RUM script placement
 - `functions/` for Cloudflare Worker logging patterns
@@ -54,17 +55,17 @@ datadogRum.init({
 
 Standard events to track in this project:
 
-| Event | Context |
-|-------|---------|
-| `post.view` | `{ postId, tags, type }` |
-| `post.external_link` | `{ postId, url, domain }` |
-| `tag.filter` | `{ tag, resultCount }` |
-| `digest.view` | `{ digestId, weekNumber }` |
-| `article.view` | `{ articleId, wordCount }` |
-| `article.scroll_depth` | `{ articleId, depth: 25|50|75|100 }` |
-| `spotify.click` | `{ songId, artist }` |
-| `theme.toggle` | `{ newTheme: 'light'|'dark' }` |
-| `rss.subscribe` | `{ feedType }` |
+| Event                  | Context                    |
+| ---------------------- | -------------------------- | --------- | --- | ------ |
+| `post.view`            | `{ postId, tags, type }`   |
+| `post.external_link`   | `{ postId, url, domain }`  |
+| `tag.filter`           | `{ tag, resultCount }`     |
+| `digest.view`          | `{ digestId, weekNumber }` |
+| `article.view`         | `{ articleId, wordCount }` |
+| `article.scroll_depth` | `{ articleId, depth: 25    | 50        | 75  | 100 }` |
+| `spotify.click`        | `{ songId, artist }`       |
+| `theme.toggle`         | `{ newTheme: 'light'       | 'dark' }` |
+| `rss.subscribe`        | `{ feedType }`             |
 
 ### Tracking Pattern
 
@@ -75,7 +76,7 @@ import { datadogRum } from '@datadog/browser-rum';
 datadogRum.addAction('post.view', {
   postId: post.id,
   tags: post.data.tags,
-  type: 'quick-post'
+  type: 'quick-post',
 });
 ```
 
@@ -85,7 +86,7 @@ For Workers (Spotify API, etc.), send logs via HTTP:
 
 ```typescript
 async function logToDatadog(
-  message: string, 
+  message: string,
   level: 'info' | 'warn' | 'error',
   context: Record<string, unknown>
 ) {
@@ -137,7 +138,7 @@ try {
 } catch (error) {
   datadogRum.addError(error, {
     context: 'spotify-fetch',
-    endpoint: '/api/spotify/now-playing'
+    endpoint: '/api/spotify/now-playing',
   });
 }
 ```
@@ -145,6 +146,7 @@ try {
 ## Documentation Reference
 
 For the latest Datadog documentation, fetch:
+
 - RUM: https://docs.datadoghq.com/real_user_monitoring/browser/
 - Product Analytics: https://docs.datadoghq.com/product_analytics/
 - Logs: https://docs.datadoghq.com/logs/

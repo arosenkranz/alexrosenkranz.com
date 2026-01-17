@@ -5,24 +5,31 @@ Run quality checks and deploy to Cloudflare Pages preview environment.
 ## Steps
 
 1. Run type checking:
+
    ```bash
    pnpm typecheck
    ```
+
    If this fails, stop and report the errors.
 
 2. Run linting:
+
    ```bash
    pnpm lint
    ```
+
    If this fails, stop and report the errors.
 
 3. Run production build:
+
    ```bash
    pnpm build
    ```
+
    If this fails, stop and report the errors.
 
 4. Deploy to preview:
+
    ```bash
    pnpm wrangler pages deploy dist --project-name=alexrosenkranz
    ```

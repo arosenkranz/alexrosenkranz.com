@@ -10,9 +10,9 @@ Create a new long-form article in `src/content/articles/` with the following det
 
 ```yaml
 ---
-title: "[Title from arguments]"
+title: '[Title from arguments]'
 publishedAt: [ISO 8601 datetime]
-description: "[Generate a 1-2 sentence description]"
+description: '[Generate a 1-2 sentence description]'
 tags:
   - [appropriate tag(s)]
 draft: true

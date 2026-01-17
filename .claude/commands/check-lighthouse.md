@@ -5,17 +5,21 @@ Run Lighthouse CI against the local production build to check performance, acces
 ## Steps
 
 1. Ensure a fresh production build:
+
    ```bash
    pnpm build
    ```
 
 2. Start the preview server in background:
+
    ```bash
    pnpm preview &
    ```
+
    Wait a few seconds for it to start.
 
 3. Run Lighthouse on key pages:
+
    ```bash
    npx lighthouse http://localhost:4321 --output=json --output-path=./lighthouse-home.json --chrome-flags="--headless"
    npx lighthouse http://localhost:4321/stream --output=json --output-path=./lighthouse-stream.json --chrome-flags="--headless"
@@ -35,11 +39,11 @@ Run Lighthouse CI against the local production build to check performance, acces
 
 ## Target Scores
 
-| Metric | Target |
-|--------|--------|
-| Performance | > 95 |
-| Accessibility | 100 |
-| Best Practices | > 95 |
-| SEO | > 95 |
-| LCP | < 2.5s |
-| CLS | < 0.1 |
+| Metric         | Target |
+| -------------- | ------ |
+| Performance    | > 95   |
+| Accessibility  | 100    |
+| Best Practices | > 95   |
+| SEO            | > 95   |
+| LCP            | < 2.5s |
+| CLS            | < 0.1  |

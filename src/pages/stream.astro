@@ -12,9 +12,7 @@ const posts = allPosts
   .sort((a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime());
 
 // Get unique tags for future filtering UI
-const allTags = [
-  ...new Set(posts.flatMap((post) => post.data.tags)),
-].sort();
+const allTags = [...new Set(posts.flatMap((post) => post.data.tags))].sort();
 ---
 
 <BaseLayout
@@ -26,10 +24,10 @@ const allTags = [
   <main class="mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:px-8">
     <!-- Page Header -->
     <div class="mb-12">
-      <h1 class="mb-4 text-4xl font-bold tracking-tight text-foreground">
+      <h1 class="text-foreground mb-4 text-4xl font-bold tracking-tight">
         Stream
       </h1>
-      <p class="text-lg leading-relaxed text-muted-foreground">
+      <p class="text-muted-foreground text-lg leading-relaxed">
         All {posts.length} posts, newest first.
       </p>
 
@@ -38,7 +36,7 @@ const allTags = [
         {
           allTags.map((tag) => (
             <button
-              class="rounded-full border border-border bg-background px-3 py-1 text-sm text-muted-foreground transition-colors hover:bg-muted"
+              class="border-border bg-background text-muted-foreground hover:bg-muted rounded-full border px-3 py-1 text-sm transition-colors"
               disabled
             >
               {tag}

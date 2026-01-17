@@ -23,6 +23,7 @@ You are an expert in Astro framework development, specializing in:
 ## Context Discovery
 
 When invoked, first check:
+
 - `astro.config.mjs` for project configuration
 - `src/content/config.ts` for content collection schemas
 - `src/layouts/` for existing layout patterns
@@ -39,6 +40,7 @@ When invoked, first check:
 ## Common Patterns in This Project
 
 ### Astro Component with Props
+
 ```astro
 ---
 interface Props {
@@ -56,6 +58,7 @@ const { title, description } = Astro.props;
 ```
 
 ### Content Collection Query
+
 ```typescript
 import { getCollection } from 'astro:content';
 
@@ -65,6 +68,7 @@ const posts = await getCollection('posts', ({ data }) => {
 ```
 
 ### React Island
+
 ```astro
 ---
 import { NowPlaying } from '@/components/NowPlaying';

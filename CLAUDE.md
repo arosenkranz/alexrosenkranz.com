@@ -10,6 +10,18 @@ Personal website and digital garden built with Astro, deployed on Cloudflare Pag
 - **Current Phase:** See STATUS.md for what's complete and what's next
 - **Detailed History:** Session logs in `~/Documents/main-vault/Sessions/`
 
+## Session Notes
+
+**IMPORTANT**: Session notes for this project are stored locally in `docs/sessions/` and are version controlled.
+
+- **Location:** `docs/sessions/`
+- **Naming:** `YYYY-MM-DD-brief-description.md`
+- **Format:** Markdown with frontmatter (date, tags, project, status)
+- **Purpose:** Track development decisions, accomplishments, and learnings per session
+- **Version Control:** Committed to git for project history
+
+This overrides the global CLAUDE.md instruction to use the Obsidian vault. Session notes for this project stay in the repo.
+
 ## Documentation First
 
 **IMPORTANT**: Before generating any code, ALWAYS read and reference the relevant documentation in the `/docs` directory first. These docs contain project-specific patterns, conventions, and requirements that must be followed.

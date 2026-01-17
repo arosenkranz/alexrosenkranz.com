@@ -11,11 +11,11 @@ Create a new post in `src/content/posts/` with the following details: $ARGUMENTS
 
 ```yaml
 ---
-title: "[Title from arguments]"
+title: '[Title from arguments]'
 publishedAt: [ISO 8601 datetime]
 tags:
   - [appropriate tag(s)]
-url: "[if this is a link post]"
+url: '[if this is a link post]'
 draft: false
 ---
 ```
