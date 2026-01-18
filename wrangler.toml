@@ -1,10 +1,18 @@
-# Cloudflare Workers configuration
-# Will be configured in later phases for Spotify Worker and Digest Generator
-
+# Cloudflare Pages configuration
 name = "alexrosenkranz-com"
-main = "functions/api/spotify/now-playing.ts"
+pages_build_output_dir = "dist"
 compatibility_date = "2025-01-13"
 
+# Workers configuration (Phase 2)
+# When implementing Cloudflare Workers (Spotify, Digest Generator),
+# uncomment and configure:
+# main = "functions/api/spotify/now-playing.ts"
+
 # Environment variables will be set via Cloudflare dashboard
-# [env.production]
-# vars = { }
+# Required for Phase 2:
+# - SPOTIFY_CLIENT_ID
+# - SPOTIFY_CLIENT_SECRET
+# - SPOTIFY_REFRESH_TOKEN
+# - DATADOG_CLIENT_TOKEN
+# - DATADOG_APPLICATION_ID
+# - DATADOG_API_KEY
