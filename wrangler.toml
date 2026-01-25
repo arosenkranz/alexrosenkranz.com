@@ -1,2 +1,4 @@
 name = "alexrosenkranz"
 pages_build_output_dir = "dist"
+main = "dist/_worker.js"
+compatibility_date = "2026-01-25"
