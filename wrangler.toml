@@ -1,7 +1,7 @@
 # Cloudflare Pages configuration
-name = "personalsite"
+name = "alexrosenkranz"
 pages_build_output_dir = "dist"
-compatibility_date = "2025-01-13"
+
 
 # Workers configuration (Phase 2)
 # When implementing Cloudflare Workers (Spotify, Digest Generator),
