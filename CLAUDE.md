@@ -30,6 +30,7 @@ Current docs:
 
 - `docs/component-patterns.md` - Reference for component patterns in this project
 - `docs/content-authoring.md` - Reference for writing content
+- `docs/git-processes.md` - Reference for git workflows and commit conventions
 
 ## Commands
 
@@ -175,6 +176,40 @@ The Cloudflare Worker needs wrangler for local dev:
 ```bash
 pnpm wrangler dev functions/api/spotify/now-playing.ts
 ```
+
+## Git & GitHub Processes
+
+See `docs/git-processes.md` for comprehensive documentation on:
+
+- **Commit Conventions**: Conventional Commits format (`type(scope): subject`)
+- **Branching Strategy**: When to use main vs. feature branches
+- **Pull Request Workflow**: Creating and merging PRs
+- **Deployment Processes**: Production and preview deployments
+- **GitHub Actions**: CI/CD automation
+- **Troubleshooting**: Common git and CI issues
+
+**Quick Reference:**
+
+```bash
+# Commit format
+type(scope): subject
+
+# Examples
+feat(posts): add photo lightbox
+fix(spotify): handle offline state
+docs: update git processes guide
+docs(session): add 2026-01-25 session notes
+```
+
+**Branching decision:**
+
+- Small changes (<15min, low risk): commit directly to `main`
+- Features/refactoring: create feature branch and PR
+
+**Commit authorship:**
+
+- NEVER include "Co-Authored-By: Claude" or any AI attribution in commit messages
+- All commits are authored by Alex Rosenkranz alone
 
 ## Important Notes
 

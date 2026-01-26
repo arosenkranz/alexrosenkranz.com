@@ -1,0 +1,73 @@
+name: Preview Deployment
+
+# OPTIONAL: This workflow is only needed if you want preview URLs commented on PRs.
+# Cloudflare Pages Git integration already creates preview deployments automatically.
+#
+# To enable this workflow:
+# 1. Generate Cloudflare API token (Pages:Edit permission)
+# 2. Add GitHub secrets: CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID
+# 3. Remove this comment block
+#
+# To disable this workflow:
+# 1. Rename this file to preview.yml.disabled
+# 2. Or delete this file entirely
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches:
+      - main
+
+jobs:
+  preview:
+    name: Deploy Preview
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+      pull-requests: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9.15.4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Build
+        run: pnpm build
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        id: deploy
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy dist --project-name=alexrosenkranz --branch=${{ github.head_ref }}
+
+      - name: Comment Preview URL on PR
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const previewUrl = '${{ steps.deploy.outputs.deployment-url }}';
+            const comment = `## 🚀 Preview Deployment
+
+            Your preview deployment is ready!
+
+            **Preview URL**: ${previewUrl}
+
+            Built from: \`${{ github.head_ref }}\` (\`${{ github.sha }}\`)`;
+
+            github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: comment
+            });

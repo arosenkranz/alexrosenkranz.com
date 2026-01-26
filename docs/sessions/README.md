@@ -99,6 +99,21 @@ When starting a new session:
 4. Document work as you go
 5. Update `STATUS.md` at the end of the session if project status changes
 
+### Commit Message for Session Notes
+
+When committing session notes, use:
+
+```bash
+docs(session): add YYYY-MM-DD session topic
+
+# Examples:
+docs(session): add 2026-01-25 git processes implementation
+docs(session): add 2026-01-28 spotify integration
+docs(session): add 2026-02-01 digest generation
+```
+
+Session note commits are always direct to main (no PR required). See `docs/git-processes.md` for full git workflow documentation.
+
 ## Tags Reference
 
 Common tags used in session notes frontmatter:
@@ -115,5 +130,7 @@ Common tags used in session notes frontmatter:
 - `documentation` - Documentation updates
 - `bug-fix` - Resolving issues
 - `refactoring` - Code restructuring
+- `git` - Git/GitHub workflows
+- `ci-cd` - Continuous integration and deployment
 
 Add specific tags as needed for your session's focus.
