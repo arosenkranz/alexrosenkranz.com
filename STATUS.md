@@ -1,8 +1,8 @@
 # Project Status
 
-**Last Updated:** 2025-01-13
-**Current Phase:** Phase 1 - MVP Complete ✅
-**Git Commit:** 7536bd2 (Initial commit)
+**Last Updated:** 2026-02-02
+**Current Phase:** Phase 1 - MVP Deployed ✅
+**Git Commit:** 94ffd86 (docs: add README)
 
 ---
 
@@ -18,7 +18,14 @@
   - `/now` - "Now page" (nownownow.com style)
 - **Content:** 5 sample posts demonstrating different content types
 - **Build Status:** Passes typecheck, builds successfully (4 pages, 143KB bundle)
-- **Git Status:** Committed and pushed to GitHub
+- **Deployment:** Live on Cloudflare Pages with GitHub integration
+- **Documentation:**
+  - Git processes and workflows documented (`docs/git-processes.md`)
+  - Session notes system in place (`docs/sessions/`)
+  - Component patterns guide (`docs/component-patterns.md`)
+  - Content authoring guide (`docs/content-authoring.md`)
+  - README with project overview
+- **Session Management:** Session continuity with STATUS.md and `/catchup` command
 
 ### What's Coming Soon 🚧
 
@@ -33,33 +40,45 @@
 
 ## What We Just Completed
 
-### Phase 1 Accomplishments (2025-01-13)
+### Recent Accomplishments (Jan 2026)
+
+- [x] **Deployed to Cloudflare Pages**
+  - Connected GitHub repo with automatic deployments
+  - Preview and production environments configured
+  - Site live and accessible
+- [x] **Migrated to Tailwind CSS v4**
+  - Updated from v3 to v4 with Vite plugin
+  - Maintained existing design system
+- [x] **Session Management System**
+  - Added STATUS.md for project state tracking
+  - Created `/catchup` command for quick context loading
+  - Moved session notes to `docs/sessions/` (version controlled)
+- [x] **Documentation**
+  - Git processes guide with commit conventions
+  - GitHub Actions workflows documented
+  - README with project overview
+  - Component patterns guide
+  - Content authoring guide
+
+### Phase 1 Accomplishments (Jan 2025)
 
 - [x] Initialized Astro 5 project with TypeScript strict mode
-- [x] Configured Tailwind CSS 4 with Vite plugin
+- [x] Configured Tailwind CSS with design system and dark mode
 - [x] Set up React integration for future interactive components
-- [x] Created design system with light/dark mode
 - [x] Built posts content collection with Zod schema
 - [x] Created 5 sample posts (article, note, code, music types)
 - [x] Built core components (Header, Footer, PostCard)
 - [x] Created all 4 pages with responsive layouts
 - [x] Configured ESLint, Prettier, Husky pre-commit hooks
 - [x] Git repository initialized and pushed to GitHub
-- [x] Session logged to Obsidian vault
 
-**Session Log:** `~/Documents/main-vault/Sessions/2025-01-13-personal-website-mvp-build.md`
+**Recent Session Logs:** `docs/sessions/`
 
 ---
 
 ## Immediate Next Steps
 
-### Priority 1 (Deploy & Content)
-
-- [ ] **Deploy to Cloudflare Pages**
-  - Connect GitHub repo in Cloudflare dashboard
-  - Build command: `pnpm build`
-  - Output directory: `dist`
-  - Test preview deployment
+### Priority 1 (Content & Polish)
 
 - [ ] **Replace Sample Content**
   - Delete or update 5 sample posts in `src/content/posts/`
@@ -67,45 +86,50 @@
   - Update `/about` page with personal content
   - Update `/now` page with current activities
 
-### Priority 2 (Fix Technical Debt)
-
-- [ ] **Migrate ESLint Config**
-  - Create `eslint.config.js` (flat config format for ESLint 9)
-  - Remove `.eslintrc.cjs`
-  - Test pre-commit hooks work correctly
-  - **Why:** ESLint 9 requires new format, currently causes hook failures
-
 - [ ] **Add Favicon & OG Image**
   - Create favicon.svg in `public/`
   - Generate OG image for social sharing
   - Update BaseLayout.astro with proper meta tags
 
+### Priority 2 (Fix Technical Debt)
+
+- [ ] **Migrate ESLint Config** (if still an issue)
+  - Create `eslint.config.js` (flat config format for ESLint 9)
+  - Remove `.eslintrc.cjs`
+  - Test pre-commit hooks work correctly
+  - **Why:** ESLint 9 requires new format, may cause hook failures
+
+- [ ] **Update Husky Hooks**
+  - Fix deprecation warning in `.husky/pre-commit`
+  - Ensure compatibility with Husky v10.0.0
+
 ---
 
 ## Known Issues & Technical Debt
 
-### Critical ⚠️
-
-1. **ESLint Config Format**
-   - **Issue:** Using legacy `.eslintrc.cjs`, ESLint 9 requires `eslint.config.js`
-   - **Impact:** Pre-commit hooks fail, had to use `--no-verify` on initial commit
-   - **Fix:** Migrate to flat config format
-   - **Priority:** High (blocks pre-commit workflow)
-
 ### Minor 🔧
 
-1. **No Tests**
-   - Currently no test suite
-   - Should add in Phase 2 (unit tests, integration tests)
-
-2. **Sample Content**
+1. **Sample Content**
    - 5 sample posts need replacement with real content
    - About/now pages have placeholder text
+   - **Priority:** Medium (affects site authenticity)
 
-3. **Husky Deprecation Warning**
-   - Husky shows deprecation warning about script format
+2. **No Tests**
+   - Currently no test suite
+   - Should add in Phase 2 (unit tests, integration tests)
+   - **Priority:** Low (add when codebase grows)
+
+3. **Husky Deprecation Warning** (possibly resolved)
+   - Husky may show deprecation warning about script format
    - Will break in v10.0.0
-   - Need to update `.husky/pre-commit` format
+   - Need to verify and update `.husky/pre-commit` format if needed
+   - **Priority:** Low (only affects future Husky upgrade)
+
+4. **ESLint Config Format** (possibly resolved)
+   - May be using legacy `.eslintrc.cjs` instead of `eslint.config.js`
+   - ESLint 9 requires flat config format
+   - Verify current state and migrate if needed
+   - **Priority:** Low (only if hooks are failing)
 
 ---
 
@@ -178,12 +202,13 @@ pnpm deploy:preview   # Deploy to Cloudflare preview
 
 ### Stack
 
-- **Framework:** Astro 5.16.9 (static site generation)
-- **Language:** TypeScript 5.9.3 (strict mode)
-- **Styling:** Tailwind CSS 4.1.18 (Vite plugin)
-- **Components:** React 18.3.1 (for future interactivity)
+- **Framework:** Astro 5.x (static site generation)
+- **Language:** TypeScript 5.x (strict mode)
+- **Styling:** Tailwind CSS 4.x (Vite plugin)
+- **Components:** React 18.x (for future interactivity)
 - **Content:** Astro Content Collections with Zod validation
-- **Package Manager:** pnpm 9.15.4
+- **Hosting:** Cloudflare Pages (connected to GitHub)
+- **Package Manager:** pnpm
 
 ### Key Files
 
@@ -208,7 +233,8 @@ pnpm deploy:preview   # Deploy to Cloudflare preview
 - What content should go on the homepage vs. /stream page?
 - Should tag filtering use URL params or client-side state?
 - Do we need a search feature for posts?
+- When to add shadcn/ui components and which ones first?
 
 ---
 
-**For detailed session history, see:** `~/Documents/main-vault/Sessions/`
+**For detailed session history, see:** `docs/sessions/`
