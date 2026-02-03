@@ -12,13 +12,26 @@ const hasBody = post.body && post.body.trim().length > 0;
 
 // Get the first tag for display
 const primaryTag = tags[0];
+
+// Construct the post detail URL
+const postUrl = `/posts/${post.slug}`;
 ---
 
 <article
-  class="group border-border bg-card rounded-lg border p-6 transition-shadow hover:shadow-md"
+  class="group border-border bg-card relative cursor-pointer rounded-lg border p-6 transition-shadow hover:shadow-md"
 >
+  <!-- Main clickable area: links to post detail -->
+  <a
+    href={postUrl}
+    class="absolute inset-0 z-0"
+    aria-label={`Read more about ${title}`}
+  >
+  </a>
+
   <!-- Header: Tag and Date -->
-  <div class="mb-3 flex items-center justify-between text-xs">
+  <div
+    class="pointer-events-none relative mb-3 flex items-center justify-between text-xs"
+  >
     <span
       class="bg-muted text-muted-foreground rounded-full px-2 py-1 font-medium"
     >
@@ -30,27 +43,29 @@ const primaryTag = tags[0];
   </div>
 
   <!-- Title -->
-  <h3 class="text-foreground mb-2 text-lg font-semibold">
+  <h3
+    class="text-foreground pointer-events-none relative mb-2 text-lg font-semibold"
+  >
     {title}
   </h3>
 
   <!-- Body Content (if present) -->
   {
     hasBody && (
-      <div class="prose prose-sm text-muted-foreground mb-4">
+      <div class="prose prose-sm text-muted-foreground pointer-events-none relative mb-4">
         <p class="line-clamp-3">{post.body}</p>
       </div>
     )
   }
 
-  <!-- External Link (if present) -->
+  <!-- External Link (if present) - positioned above the card link -->
   {
     url && (
       <a
         href={url}
         target="_blank"
         rel="noopener noreferrer"
-        class="text-primary inline-flex items-center gap-1 text-sm no-underline hover:underline"
+        class="external-link text-primary pointer-events-auto relative z-10 inline-flex items-center gap-1 text-sm no-underline hover:underline"
       >
         <span>→</span>
         <span>{new URL(url).hostname}</span>
@@ -58,3 +73,13 @@ const primaryTag = tags[0];
     )
   }
 </article>
+
+<script>
+  // Prevent external links from triggering the card's main link
+  document.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement;
+    if (target.closest('.external-link')) {
+      e.stopPropagation();
+    }
+  });
+</script>
