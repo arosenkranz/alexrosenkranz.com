@@ -211,6 +211,45 @@ docs(session): add 2026-01-25 session notes
 - NEVER include "Co-Authored-By: Claude" or any AI attribution in commit messages
 - All commits are authored by Alex Rosenkranz alone
 
+### Custom Git Guardian Agent
+
+This project has a custom `git-guardian` agent that proactively enforces git best practices:
+
+**Available Commands:**
+
+- `/commit-check` - Validate staged changes and commit message before committing
+- `/pr-ready` - Comprehensive PR readiness check with suggested PR content
+- `/branch-decide` - Interactive helper to decide main vs. feature branch
+
+**What it enforces:**
+
+- Conventional Commits format validation
+- AI attribution blocking (critical)
+- Branching decision guidance (15-minute rule)
+- PR workflow assistance
+
+**When to use:**
+
+1. Before committing: Run `/commit-check` to validate your commit message
+2. Before creating PR: Run `/pr-ready` to review all commits and get PR template
+3. When unsure about branching: Run `/branch-decide` for recommendation
+
+**Workflow integration:**
+
+```bash
+# Recommended workflow
+1. Make changes
+2. git add [files]
+3. /pre-commit-review  # Code quality
+4. /commit-check       # Git conventions
+5. git commit -m "type(scope): subject"
+```
+
+The git-guardian agent works alongside `/pre-commit-review`:
+
+- `/pre-commit-review` checks code quality (console.logs, TODOs, etc.)
+- `/commit-check` checks git conventions (commit format, attribution)
+
 ## Important Notes
 
 - Package manager is `pnpm`. Do not use npm or yarn.
