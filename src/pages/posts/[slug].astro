@@ -1,5 +1,5 @@
 ---
-import { getCollection, getEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { formatDateShort } from '@/lib/utils';
 
@@ -34,19 +34,15 @@ const isExternalLink = !!url;
       <header class="mb-8">
         <h1 class="text-foreground mb-6 text-3xl font-bold">{title}</h1>
 
-        <div class="flex items-center gap-4 font-mono text-xs uppercase tracking-wider text-muted-foreground">
+        <div
+          class="text-muted-foreground flex items-center gap-4 font-mono text-xs tracking-wider uppercase"
+        >
           <time datetime={publishedAt.toISOString()}>
             {formatDateShort(publishedAt)}
           </time>
           <span>·</span>
           <div class="flex gap-2">
-            {
-              tags.map((tag) => (
-                <span class="font-medium">
-                  {tag}
-                </span>
-              ))
-            }
+            {tags.map((tag) => <span class="font-medium">{tag}</span>)}
           </div>
         </div>
       </header>
@@ -59,7 +55,7 @@ const isExternalLink = !!url;
       <!-- External link CTA (if present) -->
       {
         isExternalLink && (
-          <div class="mt-8 border-t border-border pt-8">
+          <div class="border-border mt-8 border-t pt-8">
             <a
               href={url}
               target="_blank"
