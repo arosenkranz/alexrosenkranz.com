@@ -36,7 +36,8 @@ const navItems = [
                   href={item.href}
                   class:list={[
                     'hover:text-primary text-sm no-underline transition-colors',
-                    currentPath === item.href || currentPath === '/'
+                    currentPath === item.href ||
+                    (item.href === '/stream' && currentPath === '/')
                       ? 'text-foreground font-medium'
                       : 'text-muted-foreground',
                   ]}
