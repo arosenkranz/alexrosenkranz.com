@@ -2,33 +2,33 @@
 const currentYear = new Date().getFullYear();
 ---
 
-<footer class="border-border bg-background border-t">
-  <div class="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8">
+<footer class="bg-background mt-auto">
+  <div class="mx-auto max-w-2xl px-6 py-12 sm:px-8">
     <!-- Spotify Placeholder -->
     <div
-      class="border-border bg-card text-muted-foreground mb-6 rounded-lg border p-4 text-center text-sm"
+      class="border-border bg-muted text-muted-foreground mb-8 border p-4 text-center font-mono text-sm"
     >
       🎵 Music player coming soon
     </div>
 
     <!-- Footer Links & Copyright -->
     <div class="flex flex-col items-center justify-between gap-4 sm:flex-row">
-      <p class="text-muted-foreground text-sm">
+      <p class="text-muted-foreground font-mono text-sm">
         © {currentYear} Alex Rosenkranz
       </p>
 
       <div class="flex items-center gap-4">
         <a
           href="/rss.xml"
-          class="text-muted-foreground hover:text-primary text-sm no-underline"
+          class="text-muted-foreground hover:text-foreground text-sm no-underline hover:underline"
         >
           RSS
         </a>
         <a
-          href="https://github.com/alexrosenkranz"
+          href="https://github.com/arosenkranz"
           target="_blank"
           rel="noopener noreferrer"
-          class="text-muted-foreground hover:text-primary text-sm no-underline"
+          class="text-muted-foreground hover:text-foreground text-sm no-underline hover:underline"
         >
           GitHub
         </a>
@@ -36,7 +36,7 @@ const currentYear = new Date().getFullYear();
           href="https://www.linkedin.com/in/alex-rosenkranz"
           target="_blank"
           rel="noopener noreferrer"
-          class="text-muted-foreground hover:text-primary text-sm no-underline"
+          class="text-muted-foreground hover:text-foreground text-sm no-underline hover:underline"
         >
           LinkedIn
         </a>

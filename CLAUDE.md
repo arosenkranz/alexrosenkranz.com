@@ -28,6 +28,7 @@ This overrides the global CLAUDE.md instruction to use the Obsidian vault. Sessi
 
 Current docs:
 
+- `docs/design-preferences.md` - Reference for UI/UX design decisions and visual style
 - `docs/component-patterns.md` - Reference for component patterns in this project
 - `docs/content-authoring.md` - Reference for writing content
 - `docs/git-processes.md` - Reference for git workflows and commit conventions
@@ -53,7 +54,7 @@ pnpm deploy:preview   # Deploy to Cloudflare preview
 ## Tech Stack
 
 - **Framework:** Astro 5.x with TypeScript (strict mode)
-- **Styling:** Tailwind CSS 4.x + shadcn/ui
+- **Styling:** Tailwind CSS 4.x (fully custom components, no UI library)
 - **Content:** Markdown with Astro Content Collections
 - **Hosting:** Cloudflare Pages
 - **Functions:** Cloudflare Workers (Spotify API proxy, digest generator)
@@ -114,17 +115,22 @@ Long-form posts. Filename: `slug.md`
 
 ### Styling
 
-- Use Tailwind utility classes
+- **Design System**: Follow `docs/design-preferences.md` for all UI decisions
+- **Color Palette**: Monochrome only (black, white, grays) - no color accents
+- **Typography**: Sans-serif + monospace fonts from Google Fonts
+- **Interactive Style**: Flat/brutalist (no shadows, stark borders, simple underlines)
+- **Layout**: Narrow prose width (~650px), generous vertical spacing
+- **Components**: Fully custom with Tailwind (no shadcn/ui)
+- Use Tailwind utility classes exclusively
 - Use `cn()` helper for conditional classes
-- Follow shadcn/ui patterns for component styling
 - Dark mode: use `dark:` variant, system preference is default
 
 ### Components
 
-- shadcn/ui components live in `src/components/ui/`
-- Don't modify shadcn components directly; extend with wrapper components
+- All components are fully custom, built with Tailwind
 - Use `client:load` for components needing immediate interactivity
 - Use `client:visible` for below-fold interactive components
+- Follow brutalist/minimal aesthetic (see `docs/design-preferences.md`)
 
 ### Content
 
@@ -163,11 +169,12 @@ Required in Cloudflare dashboard:
 2. Add frontmatter with title, publishedAt, tags
 3. Optionally add body content
 
-### Adding a shadcn component
+### Creating a new component
 
-```bash
-pnpm dlx shadcn@latest add [component-name]
-```
+1. Create `.astro` file in `src/components/` for static components
+2. Create `.tsx` file for interactive React components (if needed)
+3. Follow design system in `docs/design-preferences.md`
+4. Use Tailwind utility classes for styling
 
 ### Testing the Spotify endpoint locally
 

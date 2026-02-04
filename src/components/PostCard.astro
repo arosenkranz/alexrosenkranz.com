@@ -18,7 +18,7 @@ const postUrl = `/posts/${post.slug}`;
 ---
 
 <article
-  class="group border-border bg-card relative cursor-pointer rounded-lg border p-6 transition-shadow hover:shadow-md"
+  class="group border-foreground bg-card relative cursor-pointer border-2 p-8"
 >
   <!-- Main clickable area: links to post detail -->
   <a
@@ -30,21 +30,24 @@ const postUrl = `/posts/${post.slug}`;
 
   <!-- Header: Tag and Date -->
   <div
-    class="pointer-events-none relative mb-3 flex items-center justify-between text-xs"
+    class="pointer-events-none relative mb-4 flex items-center justify-between text-xs"
   >
     <span
-      class="bg-muted text-muted-foreground rounded-full px-2 py-1 font-medium"
+      class="border-foreground text-foreground border px-2 py-1 font-mono font-medium"
     >
       {primaryTag}
     </span>
-    <time datetime={publishedAt.toISOString()} class="text-muted-foreground">
+    <time
+      datetime={publishedAt.toISOString()}
+      class="text-muted-foreground font-mono"
+    >
       {formatDateShort(publishedAt)}
     </time>
   </div>
 
   <!-- Title -->
   <h3
-    class="text-foreground pointer-events-none relative mb-2 text-lg font-semibold"
+    class="text-foreground pointer-events-none relative mb-3 text-xl font-semibold"
   >
     {title}
   </h3>
@@ -52,7 +55,7 @@ const postUrl = `/posts/${post.slug}`;
   <!-- Body Content (if present) -->
   {
     hasBody && (
-      <div class="prose prose-sm text-muted-foreground pointer-events-none relative mb-4">
+      <div class="prose prose-sm text-muted-foreground pointer-events-none relative mb-6">
         <p class="line-clamp-3">{post.body}</p>
       </div>
     )
@@ -65,7 +68,7 @@ const postUrl = `/posts/${post.slug}`;
         href={url}
         target="_blank"
         rel="noopener noreferrer"
-        class="external-link text-primary pointer-events-auto relative z-10 inline-flex items-center gap-1 text-sm no-underline hover:underline"
+        class="external-link text-foreground pointer-events-auto relative z-10 inline-flex items-center gap-1 font-mono text-sm no-underline hover:underline"
       >
         <span>→</span>
         <span>{new URL(url).hostname}</span>
