@@ -14,9 +14,9 @@ const navItems = [
       <!-- Name -->
       <a
         href="/"
-        class="text-foreground font-medium no-underline hover:underline"
+        class="text-foreground font-mono text-sm no-underline hover:underline"
       >
-        Alex Rosenkranz
+        /alex
       </a>
 
       <!-- Navigation Links -->
@@ -27,7 +27,7 @@ const navItems = [
               <a
                 href={item.href}
                 class:list={[
-                  'hover:text-foreground text-sm no-underline',
+                  'hover:text-foreground font-mono text-sm no-underline',
                   currentPath === item.href ||
                   (item.href === '/stream' && currentPath === '/')
                     ? 'text-foreground font-medium'

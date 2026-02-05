@@ -23,7 +23,9 @@ const latestPosts = posts.slice(0, 5);
   <main class="mx-auto max-w-2xl flex-1 px-6 py-16 sm:px-8 sm:py-24">
     <!-- Intro -->
     <section class="mb-16">
-      <p class="text-lg leading-relaxed font-medium">
+      <p
+        class="border-foreground-quaternary border-l-2 pl-4 text-lg leading-relaxed font-medium"
+      >
         Hi, I'm Alex. I work at Datadog and spend my time building things on the
         web, tinkering with a homelab, and collecting interesting ideas. This is
         my corner of the internet.
@@ -59,16 +61,12 @@ const latestPosts = posts.slice(0, 5);
     <!-- Writing -->
     <section>
       <div class="mb-6 flex items-baseline justify-between">
-        <h2
-          class="text-foreground-quaternary text-sm font-medium tracking-wider uppercase"
-        >
-          Writing
-        </h2>
+        <h2 class="text-foreground-quaternary font-mono text-sm">lately</h2>
         <a
           href="/stream"
-          class="text-foreground-tertiary hover:text-foreground text-sm no-underline hover:underline"
+          class="text-foreground-tertiary hover:text-foreground font-mono text-sm no-underline hover:underline"
         >
-          See all &rarr;
+          see all &rarr;
         </a>
       </div>
 
