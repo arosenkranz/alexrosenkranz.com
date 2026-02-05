@@ -13,68 +13,95 @@ const lastUpdated = 'January 13, 2025';
   <Header />
 
   <main class="mx-auto max-w-2xl flex-1 px-6 py-16 sm:px-8 sm:py-24">
-    <article class="prose prose-lg dark:prose-invert">
-      <h1>What I'm doing now</h1>
+    <h1 class="text-foreground mb-2 text-2xl font-semibold">
+      What I'm doing now
+    </h1>
+    <p class="text-foreground-secondary mb-2">
+      A snapshot of what I'm currently focused on.
+    </p>
+    <p class="text-foreground-quaternary mb-12 text-sm">
+      Last updated: {lastUpdated}
+    </p>
 
-      <p class="text-muted-foreground text-sm">
-        Last updated: {lastUpdated}
-      </p>
-
-      <p>
-        This is a <a
-          href="https://nownownow.com/about"
-          target="_blank"
-          rel="noopener noreferrer">now page</a
-        >—a snapshot of what I'm currently focused on.
-      </p>
-
-      <h2>Projects</h2>
-
-      <ul>
+    <!-- Projects -->
+    <section class="mb-12">
+      <h2
+        class="text-foreground-quaternary mb-4 text-sm font-medium tracking-wider uppercase"
+      >
+        Projects
+      </h2>
+      <ul class="text-foreground-secondary flex flex-col gap-3 leading-relaxed">
         <li>
-          <strong>Personal Website Rebuild:</strong> Building this site with Astro,
-          Tailwind CSS, and Cloudflare Pages. Implementing a stream-based content
-          model for quick posts and longer articles.
+          <span class="text-foreground font-medium"
+            >Personal Website Rebuild:</span
+          > Building this site with Astro, Tailwind CSS, and Cloudflare Pages. Implementing
+          a stream-based content model for quick posts and longer articles.
         </li>
         <li>
-          <strong>Homelab Setup:</strong> Running Home Assistant and Music Assistant
-          on a Raspberry Pi 5, with various Docker services monitored by Datadog.
+          <span class="text-foreground font-medium">Homelab Setup:</span> Running
+          Home Assistant and Music Assistant on a Raspberry Pi 5, with various Docker
+          services monitored by Datadog.
         </li>
       </ul>
+    </section>
 
-      <h2>Learning</h2>
+    <hr class="border-foreground-quaternary mb-12" />
 
-      <ul>
+    <!-- Learning -->
+    <section class="mb-12">
+      <h2
+        class="text-foreground-quaternary mb-4 text-sm font-medium tracking-wider uppercase"
+      >
+        Learning
+      </h2>
+      <ul class="text-foreground-secondary flex flex-col gap-2 leading-relaxed">
         <li>Astro framework and static site generation patterns</li>
         <li>Self-hosting services and Linux administration</li>
         <li>Terraform for infrastructure as code</li>
         <li>AWS cloud fundamentals</li>
       </ul>
+    </section>
 
-      <h2>Reading</h2>
+    <hr class="border-foreground-quaternary mb-12" />
 
-      <ul>
+    <!-- Reading -->
+    <section class="mb-12">
+      <h2
+        class="text-foreground-quaternary mb-4 text-sm font-medium tracking-wider uppercase"
+      >
+        Reading
+      </h2>
+      <ul class="text-foreground-secondary flex flex-col gap-2 leading-relaxed">
         <li>Various articles on web performance and observability</li>
         <li>Technical documentation for homelab projects</li>
       </ul>
+    </section>
 
-      <h2>Work</h2>
+    <hr class="border-foreground-quaternary mb-12" />
 
-      <p>
+    <!-- Work -->
+    <section class="mb-12">
+      <h2
+        class="text-foreground-quaternary mb-4 text-sm font-medium tracking-wider uppercase"
+      >
+        Work
+      </h2>
+      <p class="text-foreground-secondary leading-relaxed">
         Working at Datadog on observability and developer tools. Focused on
         making complex systems easier to understand and debug.
       </p>
+    </section>
 
-      <hr />
+    <hr class="border-foreground-quaternary mb-12" />
 
-      <p class="text-muted-foreground text-sm">
-        Inspired by Derek Sivers' <a
-          href="https://nownownow.com"
-          target="_blank"
-          rel="noopener noreferrer">/now</a
-        > movement. This page is updated monthly or whenever things change significantly.
-      </p>
-    </article>
+    <p class="text-foreground-quaternary text-sm">
+      Inspired by Derek Sivers' <a
+        href="https://nownownow.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-foreground-tertiary underline">/now</a
+      > movement. This page is updated monthly or whenever things change significantly.
+    </p>
   </main>
 
   <Footer />

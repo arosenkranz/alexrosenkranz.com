@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
-import PostCard from '@/components/PostCard.astro';
+import PostListItem from '@/components/PostListItem.astro';
 
 // Get all posts, filter drafts, and sort by date
 const allPosts = await getCollection('posts');
@@ -11,8 +11,21 @@ const posts = allPosts
   .filter((post) => !post.data.draft)
   .sort((a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime());
 
-// Get unique tags for future filtering UI
-const allTags = [...new Set(posts.flatMap((post) => post.data.tags))].sort();
+// Group posts by year
+const postsByYear = posts.reduce<Record<number, typeof posts>>(
+  (groups, post) => {
+    const year = post.data.publishedAt.getFullYear();
+    return {
+      ...groups,
+      [year]: [...(groups[year] ?? []), post],
+    };
+  },
+  {}
+);
+
+const years = Object.keys(postsByYear)
+  .map(Number)
+  .sort((a, b) => b - a);
 ---
 
 <BaseLayout
@@ -24,31 +37,29 @@ const allTags = [...new Set(posts.flatMap((post) => post.data.tags))].sort();
   <main class="mx-auto max-w-2xl flex-1 px-6 py-16 sm:px-8 sm:py-24">
     <!-- Page Header -->
     <div class="mb-16">
-      <h1 class="text-foreground mb-6 text-4xl font-bold tracking-tight">
+      <h1 class="text-foreground mb-4 text-2xl font-semibold tracking-tight">
         Stream
       </h1>
-      <p class="text-muted-foreground text-lg leading-relaxed">
-        All {posts.length} posts, newest first.
+      <p class="text-foreground-secondary leading-relaxed">
+        A collection of things I find interesting—articles, music, projects, and
+        thoughts. Updated frequently.
       </p>
-
-      <!-- TODO: Tag filter UI (non-functional for MVP) -->
-      <div class="mt-8 flex flex-wrap gap-2">
-        {
-          allTags.map((tag) => (
-            <button
-              class="border-border bg-background text-muted-foreground hover:bg-muted border px-3 py-1 font-mono text-sm transition-colors"
-              disabled
-            >
-              {tag}
-            </button>
-          ))
-        }
-      </div>
     </div>
 
-    <!-- Posts Grid -->
-    <div class="grid gap-12 sm:grid-cols-1">
-      {posts.map((post) => <PostCard post={post} />)}
+    <!-- Posts grouped by year -->
+    <div class="flex flex-col gap-12">
+      {
+        years.map((year) => (
+          <section>
+            <h2 class="text-foreground-quaternary mb-4 text-sm">{year}</h2>
+            <ul class="flex flex-col gap-1">
+              {(postsByYear[year] ?? []).map((post) => (
+                <PostListItem post={post} />
+              ))}
+            </ul>
+          </section>
+        ))
+      }
     </div>
   </main>
 

@@ -11,54 +11,72 @@ import Footer from '@/components/Footer.astro';
   <Header />
 
   <main class="mx-auto max-w-2xl flex-1 px-6 py-16 sm:px-8 sm:py-24">
-    <article class="prose prose-lg dark:prose-invert">
-      <h1>About</h1>
+    <h1 class="text-foreground mb-8 text-2xl font-semibold">About</h1>
 
-      <p>
+    <!-- Intro -->
+    <section class="mb-12">
+      <p class="text-foreground text-lg leading-relaxed font-medium">
         Hi, I'm Alex. I work at Datadog and spend my time thinking about
         observability, developer tools, and building things on the web.
       </p>
-
-      <p>
+      <p class="text-foreground-secondary mt-4 leading-relaxed">
         This site is my digital garden—a place to collect things I find
         interesting, share what I'm learning, and document projects I'm working
         on. It's not career-focused or particularly polished. Just a personal
         corner of the internet.
       </p>
+    </section>
 
-      <h2>What I'm up to</h2>
+    <hr class="border-foreground-quaternary mb-12" />
 
-      <p>
+    <!-- What I'm up to -->
+    <section class="mb-12">
+      <h2
+        class="text-foreground-quaternary mb-4 text-sm font-medium tracking-wider uppercase"
+      >
+        What I'm up to
+      </h2>
+      <p class="text-foreground-secondary leading-relaxed">
         Right now, I'm exploring self-hosting, building a homelab with a
         Raspberry Pi, and learning more about cloud infrastructure (AWS,
         Terraform, etc.). I'm also interested in creative coding with tools like
         P5.js and Three.js.
       </p>
-
-      <p>
-        Check out my <a href="/now">now page</a> for what I'm currently focused on.
+      <p class="text-foreground-secondary mt-4 leading-relaxed">
+        Check out my <a href="/now" class="text-foreground underline"
+          >now page</a
+        > for what I'm currently focused on.
       </p>
+    </section>
 
-      <h2>About this site</h2>
+    <hr class="border-foreground-quaternary mb-12" />
 
-      <p>
+    <!-- About this site -->
+    <section>
+      <h2
+        class="text-foreground-quaternary mb-4 text-sm font-medium tracking-wider uppercase"
+      >
+        About this site
+      </h2>
+      <p class="text-foreground-secondary leading-relaxed">
         Built with <a
           href="https://astro.build"
           target="_blank"
-          rel="noopener noreferrer">Astro</a
+          rel="noopener noreferrer"
+          class="text-foreground underline">Astro</a
         >, styled with <a
           href="https://tailwindcss.com"
           target="_blank"
-          rel="noopener noreferrer">Tailwind CSS</a
+          rel="noopener noreferrer"
+          class="text-foreground underline">Tailwind CSS</a
         >, and deployed on Cloudflare Pages. The source code is available on <a
           href="https://github.com/alexrosenkranz/alexrosenkranz.com"
           target="_blank"
-          rel="noopener noreferrer">GitHub</a
+          rel="noopener noreferrer"
+          class="text-foreground underline">GitHub</a
         >.
       </p>
-
-      <p>More content coming soon.</p>
-    </article>
+    </section>
   </main>
 
   <Footer />
