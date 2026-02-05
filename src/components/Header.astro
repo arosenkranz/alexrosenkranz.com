@@ -5,46 +5,37 @@ const navItems = [
   { href: '/stream', label: 'Stream' },
   { href: '/now', label: 'Now' },
   { href: '/about', label: 'About' },
-  { href: '/writing', label: 'Writing', disabled: true },
-  { href: '/digests', label: 'Digests', disabled: true },
 ];
 ---
 
-<header class="border-border bg-background border-b">
-  <div class="mx-auto max-w-5xl px-4 py-6 sm:px-6 lg:px-8">
+<header class="bg-background">
+  <div class="mx-auto max-w-2xl px-6 pt-8 sm:px-8 sm:pt-12">
     <nav class="flex items-center justify-between">
-      <!-- Logo/Name -->
+      <!-- Name -->
       <a
         href="/"
-        class="text-foreground hover:text-primary text-xl font-semibold no-underline"
+        class="text-foreground font-mono text-2xl no-underline hover:underline"
       >
-        Alex Rosenkranz
+        /alex
       </a>
 
       <!-- Navigation Links -->
-      <ul class="flex items-center gap-6">
+      <ul class="flex items-center gap-5">
         {
           navItems.map((item) => (
             <li>
-              {item.disabled ? (
-                <span class="text-muted-foreground text-sm">
-                  {item.label}
-                  <span class="ml-1 text-xs">(soon)</span>
-                </span>
-              ) : (
-                <a
-                  href={item.href}
-                  class:list={[
-                    'hover:text-primary text-sm no-underline transition-colors',
-                    currentPath === item.href ||
-                    (item.href === '/stream' && currentPath === '/')
-                      ? 'text-foreground font-medium'
-                      : 'text-muted-foreground',
-                  ]}
-                >
-                  {item.label}
-                </a>
-              )}
+              <a
+                href={item.href}
+                class:list={[
+                  'hover:text-foreground font-mono text-sm no-underline',
+                  currentPath === item.href ||
+                  (item.href === '/stream' && currentPath === '/')
+                    ? 'text-foreground font-medium'
+                    : 'text-foreground-tertiary',
+                ]}
+              >
+                {item.label}
+              </a>
             </li>
           ))
         }

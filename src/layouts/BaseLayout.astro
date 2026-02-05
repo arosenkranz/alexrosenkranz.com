@@ -44,7 +44,7 @@ const canonicalURL = new URL(Astro.url.pathname, siteUrl);
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
 
@@ -63,6 +63,14 @@ const canonicalURL = new URL(Astro.url.pathname, siteUrl);
 
       const theme = getTheme();
       document.documentElement.classList.toggle('dark', theme === 'dark');
+
+      // Listen for system preference changes (only when no saved preference)
+      window
+        .matchMedia('(prefers-color-scheme: dark)')
+        .addEventListener('change', (e) => {
+          if (localStorage.getItem('theme')) return;
+          document.documentElement.classList.toggle('dark', e.matches);
+        });
     </script>
 
     <!--
@@ -89,7 +97,7 @@ const canonicalURL = new URL(Astro.url.pathname, siteUrl);
       </script>
     -->
   </head>
-  <body class="antialiased">
+  <body class="flex min-h-screen flex-col antialiased">
     <slot />
   </body>
 </html>

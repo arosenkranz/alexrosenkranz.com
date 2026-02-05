@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
-import PostCard from '@/components/PostCard.astro';
+import PostListItem from '@/components/PostListItem.astro';
 
 // Get all posts, filter drafts, and sort by date
 const allPosts = await getCollection('posts');
@@ -11,56 +11,69 @@ const posts = allPosts
   .filter((post) => !post.data.draft)
   .sort((a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime());
 
-// Get unique tags for future filtering UI
-const allTags = [...new Set(posts.flatMap((post) => post.data.tags))].sort();
+const latestPosts = posts.slice(0, 5);
 ---
 
 <BaseLayout
   title="Alex Rosenkranz"
-  description="A stream of things I find interesting: articles, music, code, and more."
+  description="Personal website and digital garden."
 >
   <Header />
 
-  <main class="mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:px-8">
-    <!-- Page Header -->
-    <div class="mb-12">
-      <h1 class="text-foreground mb-4 text-4xl font-bold tracking-tight">
-        Stream
-      </h1>
-      <p class="text-muted-foreground text-lg leading-relaxed">
-        A collection of things I find interesting—articles I'm reading, music
-        I'm listening to, projects I'm working on, and thoughts I'm thinking.
-        Updated frequently.
+  <main class="mx-auto max-w-2xl flex-1 px-6 py-16 sm:px-8 sm:py-24">
+    <!-- Intro -->
+    <section class="mb-16">
+      <p
+        class="border-foreground-quaternary border-l-2 pl-4 text-lg leading-relaxed font-medium"
+      >
+        Hi, I'm Alex. I work at Datadog and spend my time building things on the
+        web, tinkering with a homelab, and collecting interesting ideas. This is
+        my corner of the internet.
       </p>
+    </section>
 
-      <!-- TODO: Tag filter UI (non-functional for MVP) -->
-      <div class="mt-6 flex flex-wrap gap-2">
-        {
-          allTags.map((tag) => (
-            <button
-              class="border-border bg-background text-muted-foreground hover:bg-muted rounded-full border px-3 py-1 text-sm transition-colors"
-              disabled
-            >
-              {tag}
-            </button>
-          ))
-        }
+    <!-- Social links -->
+    <section class="mb-16 flex items-center gap-4">
+      <a
+        href="https://github.com/arosenkranz"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-foreground-tertiary hover:text-foreground text-sm no-underline hover:underline"
+      >
+        GitHub
+      </a>
+      <a
+        href="https://www.linkedin.com/in/alexrosenkranz"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-foreground-tertiary hover:text-foreground text-sm no-underline hover:underline"
+      >
+        LinkedIn
+      </a>
+      <a
+        href="/rss.xml"
+        class="text-foreground-tertiary hover:text-foreground text-sm no-underline hover:underline"
+      >
+        RSS
+      </a>
+    </section>
+
+    <!-- Writing -->
+    <section>
+      <div class="mb-6 flex items-baseline justify-between">
+        <h2 class="text-foreground-quaternary font-mono text-sm">lately</h2>
+        <a
+          href="/stream"
+          class="text-foreground-tertiary hover:text-foreground font-mono text-sm no-underline hover:underline"
+        >
+          see all &rarr;
+        </a>
       </div>
-    </div>
 
-    <!-- Posts Grid -->
-    <div class="grid gap-6 sm:grid-cols-2">
-      {posts.map((post) => <PostCard post={post} />)}
-    </div>
-
-    <!-- Empty State -->
-    {
-      posts.length === 0 && (
-        <div class="border-border bg-card rounded-lg border p-12 text-center">
-          <p class="text-muted-foreground">No posts yet. Check back soon!</p>
-        </div>
-      )
-    }
+      <ul class="flex flex-col gap-1">
+        {latestPosts.map((post) => <PostListItem post={post} />)}
+      </ul>
+    </section>
   </main>
 
   <Footer />
