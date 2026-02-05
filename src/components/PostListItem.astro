@@ -1,0 +1,21 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  post: CollectionEntry<'posts'>;
+}
+
+const { post } = Astro.props;
+const { title, url } = post.data;
+const postUrl = `/posts/${post.slug}`;
+---
+
+<li class="group">
+  <a
+    href={postUrl}
+    class="text-foreground font-medium no-underline group-hover:underline"
+  >
+    {title}
+  </a>
+  {url && <span class="text-foreground-quaternary ml-1">→</span>}
+</li>
