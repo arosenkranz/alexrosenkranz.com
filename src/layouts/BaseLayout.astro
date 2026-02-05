@@ -63,6 +63,14 @@ const canonicalURL = new URL(Astro.url.pathname, siteUrl);
 
       const theme = getTheme();
       document.documentElement.classList.toggle('dark', theme === 'dark');
+
+      // Listen for system preference changes (only when no saved preference)
+      window
+        .matchMedia('(prefers-color-scheme: dark)')
+        .addEventListener('change', (e) => {
+          if (localStorage.getItem('theme')) return;
+          document.documentElement.classList.toggle('dark', e.matches);
+        });
     </script>
 
     <!--
