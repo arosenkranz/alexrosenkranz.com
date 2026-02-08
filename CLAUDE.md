@@ -8,7 +8,7 @@ Personal website and digital garden built with Astro, deployed on Cloudflare Pag
 
 - **Quick Start:** Run `/catchup` command to read STATUS.md and git status
 - **Current Phase:** See STATUS.md for what's complete and what's next
-- **Detailed History:** Session logs in `~/Documents/main-vault/Sessions/`
+- **Detailed History:** Session logs in `docs/sessions/` (project-specific, version controlled)
 
 ## Session Notes
 
@@ -19,8 +19,11 @@ Personal website and digital garden built with Astro, deployed on Cloudflare Pag
 - **Format:** Markdown with frontmatter (date, tags, project, status)
 - **Purpose:** Track development decisions, accomplishments, and learnings per session
 - **Version Control:** Committed to git for project history
+- **Command:** Run `/session-log` at the end of a session to create a curated session note
 
 This overrides the global CLAUDE.md instruction to use the Obsidian vault. Session notes for this project stay in the repo.
+
+**When to log:** Any session involving feature work, design decisions, bug fixes with interesting root causes, or architectural changes should get a session note. The Obsidian SessionEnd hook still runs automatically for cross-project logging, but `/session-log` creates the curated, version-controlled record for this project specifically.
 
 ## Documentation First
 
@@ -118,7 +121,7 @@ Long-form posts. Filename: `slug.md`
 - **Design System**: Follow `docs/design-preferences.md` for all UI decisions
 - **Color Palette**: Monochrome only (black, white, grays) - no color accents
 - **Typography**: Sans-serif + monospace fonts from Google Fonts
-- **Interactive Style**: Flat/brutalist (no shadows, stark borders, simple underlines)
+- **Interactive Style**: Flat (no shadows, stark borders, simple underlines)
 - **Layout**: Narrow prose width (~650px), generous vertical spacing
 - **Components**: Fully custom with Tailwind (no shadcn/ui)
 - Use Tailwind utility classes exclusively
@@ -130,7 +133,7 @@ Long-form posts. Filename: `slug.md`
 - All components are fully custom, built with Tailwind
 - Use `client:load` for components needing immediate interactivity
 - Use `client:visible` for below-fold interactive components
-- Follow brutalist/minimal aesthetic (see `docs/design-preferences.md`)
+- Follow the design system (see `docs/design-preferences.md`)
 
 ### Content
 

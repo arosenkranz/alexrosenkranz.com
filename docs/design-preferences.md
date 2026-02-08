@@ -8,7 +8,7 @@ This document captures the design aesthetic, visual style, and UI preferences fo
 
 ## Design Philosophy
 
-**Aesthetic:** Minimal-Brutalist Hybrid
+**Aesthetic:** Minimal and content-first
 
 - Clean and simple with stark, bold contrasts
 - Focus on typography and readability
@@ -122,7 +122,7 @@ This document captures the design aesthetic, visual style, and UI preferences fo
 
 ## Interactive Elements
 
-**Style:** Flat/Brutalist
+**Style:** Flat
 
 - No drop shadows
 - No gradients
@@ -262,7 +262,7 @@ Track design decisions made during implementation:
 - Chose monochrome palette (no color accents)
 - Selected sans + mono font approach
 - Decided on narrow prose width (~650px)
-- Committed to flat/brutalist interactive elements
+- Committed to flat interactive elements
 - Set very generous vertical spacing as standard
 
 ---

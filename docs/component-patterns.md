@@ -2,7 +2,7 @@
 
 **Last Updated:** 2026-02-03
 
-Reference for component patterns used in this project. All components follow the minimal-brutalist design system described in `design-preferences.md`.
+Reference for component patterns used in this project. All components follow the design system described in `design-preferences.md`.
 
 ---
 
@@ -11,7 +11,7 @@ Reference for component patterns used in this project. All components follow the
 Before creating components, remember:
 
 - **Monochrome only** - No color accents (use grays, black, white)
-- **Flat/brutalist** - No shadows, stark borders, no rounded corners (0px radius)
+- **Flat** - No shadows, stark borders, no rounded corners (0px radius)
 - **Simple interactions** - Instant feedback, no animations
 - **Typography hierarchy** - Sans for body/headings, mono for code/tags/metadata
 - **Generous spacing** - Breathe between elements
@@ -20,7 +20,7 @@ Before creating components, remember:
 
 ## Astro Components
 
-### PostCard Pattern (Brutalist Card)
+### PostCard Pattern
 
 ```astro
 ---
@@ -74,7 +74,7 @@ const postUrl = `/posts/${post.slug}`;
 - `font-mono` - Monospace for tags, dates, metadata
 - `p-8` - Generous padding (32px)
 - No `rounded-*` classes - Completely flat corners
-- No `hover:shadow-*` - No hover effects (full brutalist)
+- No `hover:shadow-*` - No hover shadow effects
 
 ---
 
@@ -310,7 +310,7 @@ import PostCard from '@/components/PostCard.astro';
 
 ---
 
-## Button Pattern (Brutalist Buttons)
+## Button Pattern
 
 ```astro
 <!-- Primary button (stark border, no background) -->

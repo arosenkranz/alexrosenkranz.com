@@ -1,8 +1,8 @@
 # Project Status
 
-**Last Updated:** 2026-02-02
-**Current Phase:** Phase 1 - MVP Deployed ✅
-**Git Commit:** 94ffd86 (docs: add README)
+**Last Updated:** 2026-02-07
+**Current Phase:** Phase 1 - MVP Deployed ✅ (Redesign Complete)
+**Git Commit:** b56f5b1 (Merge PR #2 - UI Redesign)
 
 ---
 
@@ -11,14 +11,26 @@
 ### What's Working ✅
 
 - Personal website MVP built with Astro 5 + TypeScript + Tailwind CSS 4
+- **UI Redesign** (PR #2 merged):
+  - Monochrome palette with stark borders and clean typography
+  - 4-level color hierarchy with refined typography (sans + monospace)
+  - `/alex` personal identity mark with monospace accents
+  - System color scheme detection with real-time theme response
+  - Redesigned header, footer, and PostListItem components
+  - All pages redesigned with refined minimalism and warmer voice
 - **Pages Live:**
   - `/` (homepage/stream) - Shows all posts
   - `/stream` - Dedicated stream page with tag filter UI
   - `/about` - Personal bio page
   - `/now` - "Now page" (nownownow.com style)
+  - `/posts/[slug]` - Individual post detail pages (clickable cards, PR #1)
 - **Content:** 5 sample posts demonstrating different content types
-- **Build Status:** Passes typecheck, builds successfully (4 pages, 143KB bundle)
+- **Build Status:** Passes typecheck, builds successfully
 - **Deployment:** Live on Cloudflare Pages with GitHub integration
+- **Git Tooling:**
+  - Git-guardian agent for commit validation and branching guidance
+  - `/commit-check`, `/pr-ready`, `/branch-decide` commands
+  - AI attribution blocking enforced at multiple checkpoints
 - **Documentation:**
   - Git processes and workflows documented (`docs/git-processes.md`)
   - Session notes system in place (`docs/sessions/`)
@@ -40,7 +52,25 @@
 
 ## What We Just Completed
 
-### Recent Accomplishments (Jan 2026)
+### Recent Accomplishments (Feb 2026)
+
+- [x] **UI Redesign** (PR #2, 7 commits)
+  - Implemented minimal aesthetic across entire site
+  - Expanded to 4-level color hierarchy with refined typography
+  - Redesigned all components: header, footer, PostListItem
+  - Redesigned all pages with refined minimalism
+  - Added `/alex` personal identity mark with monospace accents
+  - Added real-time system color scheme response
+  - Fixed LinkedIn URL, enlarged mark
+- [x] **Git Guardian Agent** (Feb 2 session)
+  - Created `git-guardian` agent for commit validation
+  - Added `/commit-check`, `/pr-ready`, `/branch-decide` commands
+  - AI attribution blocking at multiple enforcement points
+  - Branching decision matrix (15-minute rule)
+- [x] **Clickable Post Cards** (PR #1)
+  - Posts link to individual detail pages at `/posts/[slug]`
+
+### Earlier Accomplishments (Jan 2026)
 
 - [x] **Deployed to Cloudflare Pages**
   - Connected GitHub repo with automatic deployments
@@ -220,10 +250,12 @@ pnpm deploy:preview   # Deploy to Cloudflare preview
 
 ### Design System
 
-- **Colors:** CSS custom properties for light/dark mode
-- **Fonts:** Inter (sans), JetBrains Mono (mono)
-- **Dark Mode:** System preference detection with localStorage override
-- **Spacing:** Generous whitespace, typography-focused design
+- **Aesthetic:** Minimal with monochrome palette, stark borders, no shadows
+- **Colors:** 4-level hierarchy via CSS custom properties (light/dark mode)
+- **Fonts:** Sans-serif + monospace from Google Fonts
+- **Identity:** `/alex` mark with monospace accents
+- **Dark Mode:** Real-time system preference detection
+- **Spacing:** Generous whitespace, narrow prose width (~650px), typography-focused
 
 ---
 
