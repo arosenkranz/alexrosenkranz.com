@@ -20,6 +20,9 @@ importers:
       '@astrojs/rss':
         specifier: ^4.0.9
         version: 4.0.14
+      '@datadog/browser-rum':
+        specifier: ^6.26.0
+        version: 6.26.0
       '@tailwindcss/vite':
         specifier: ^4.0.0
         version: 4.1.18(vite@6.4.1(jiti@2.6.1)(lightningcss@1.30.2)(yaml@2.8.2))
@@ -327,6 +330,20 @@ packages:
   '@cspotcode/source-map-support@0.8.1':
     resolution: {integrity: sha512-IchNf6dN4tHoMFIn/7OE8LWZ19Y6q/67Bmf6vnGREv8RSbBVb9LPJxEcnwrcwX6ixSvaiGoomAUvu4YSxXrVgw==}
     engines: {node: '>=12'}
+
+  '@datadog/browser-core@6.26.0':
+    resolution: {integrity: sha512-F0KDzcmhpXPO3lr7uIMOc7t3rdvWqL3Jg/YQbODplwDGZYh99rtfU6M/6onDuImr4tsbiGtBJVcGdDj3rmJibQ==}
+
+  '@datadog/browser-rum-core@6.26.0':
+    resolution: {integrity: sha512-2JFFGZ2TUoaWiSVBSBFJoy0j9QAqHSg8Kv6goRJc0XLK6OTNsStPZMVzRNKa4qtbsYQmRtdgFqo33JQEEXziGA==}
+
+  '@datadog/browser-rum@6.26.0':
+    resolution: {integrity: sha512-4UtsEh5cgeYX5g60cVxviOc/4mZgECoIbsJEtMln88YoXxbgzqoSCoR3XssmNEv7NhG17OJjyXsuxtItg+kQIA==}
+    peerDependencies:
+      '@datadog/browser-logs': 6.26.0
+    peerDependenciesMeta:
+      '@datadog/browser-logs':
+        optional: true
 
   '@emmetio/abbreviation@2.3.3':
     resolution: {integrity: sha512-mgv58UrU3rh4YgbE/TzgLQwJ3pFsHHhCLqY20aJq+9comytTXUDNGG/SMtSeMJdkpxgXSXunBGLD8Boka3JyVA==}
@@ -4489,6 +4506,17 @@ snapshots:
   '@cspotcode/source-map-support@0.8.1':
     dependencies:
       '@jridgewell/trace-mapping': 0.3.9
+
+  '@datadog/browser-core@6.26.0': {}
+
+  '@datadog/browser-rum-core@6.26.0':
+    dependencies:
+      '@datadog/browser-core': 6.26.0
+
+  '@datadog/browser-rum@6.26.0':
+    dependencies:
+      '@datadog/browser-core': 6.26.0
+      '@datadog/browser-rum-core': 6.26.0
 
   '@emmetio/abbreviation@2.3.3':
     dependencies:

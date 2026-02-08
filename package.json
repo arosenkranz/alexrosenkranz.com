@@ -21,6 +21,7 @@
     "@astrojs/cloudflare": "^12.6.12",
     "@astrojs/react": "^3.6.2",
     "@astrojs/rss": "^4.0.9",
+    "@datadog/browser-rum": "^6.26.0",
     "@tailwindcss/vite": "^4.0.0",
     "@types/react": "^18.3.17",
     "@types/react-dom": "^18.3.5",
