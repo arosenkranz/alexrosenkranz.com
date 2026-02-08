@@ -9,6 +9,7 @@ tools:
   - Edit
   - Write
   - WebFetch
+color: purple
 ---
 
 You are a Datadog observability expert, specializing in:

@@ -236,6 +236,8 @@ ci/preview-workflow
 
 ### Workflows
 
+Rules to follow when working with Git, ALWAYS consider the following when deciding what type of branching strategy to use:
+
 #### Small Change (Direct to Main)
 
 ```bash
@@ -756,4 +758,4 @@ git push
 
 ---
 
-**Last updated:** 2026-01-25
+**Last updated:** 2026-02-07

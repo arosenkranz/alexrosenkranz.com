@@ -62,6 +62,6 @@ Based on STATUS.md and git status:
 ## Notes
 
 - **STATUS.md is the source of truth** for project state
-- Detailed session history lives in `~/Documents/main-vault/Sessions/`
+- Detailed session history lives in `docs/sessions/` (version controlled)
 - This command helps you pick up exactly where the last session left off
 - Update STATUS.md at the end of each session to keep it current

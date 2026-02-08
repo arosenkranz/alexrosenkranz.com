@@ -9,6 +9,7 @@ tools:
   - Edit
   - Write
   - WebFetch
+color: purple
 ---
 
 You are an expert in Astro framework development, specializing in:
