@@ -37,12 +37,12 @@ This project uses Datadog RUM with these settings:
 import { datadogRum } from '@datadog/browser-rum';
 
 datadogRum.init({
-  applicationId: import.meta.env.PUBLIC_DATADOG_APPLICATION_ID,
-  clientToken: import.meta.env.PUBLIC_DATADOG_CLIENT_TOKEN,
-  site: 'datadoghq.com',
-  service: 'alexrosenkranz-web',
-  env: import.meta.env.MODE,
-  version: '1.0.0',
+  applicationId: import.meta.env.PUBLIC_DD_APPLICATION_ID || '',
+  clientToken: import.meta.env.PUBLIC_DD_CLIENT_TOKEN || '',
+  site: import.meta.env.PUBLIC_DD_SITE || 'datadoghq.com',
+  service: import.meta.env.PUBLIC_DD_SERVICE || 'alexrosenkranz-web',
+  env: import.meta.env.PUBLIC_DD_ENV || 'production',
+  version: __APP_VERSION__, // injected from package.json at build time
   sessionSampleRate: 100,
   sessionReplaySampleRate: 20,
   trackUserInteractions: true,
@@ -51,6 +51,33 @@ datadogRum.init({
   defaultPrivacyLevel: 'mask-user-input',
 });
 ```
+
+### Version Management
+
+The `version` field is injected at build time from `package.json` via Vite `define` in `astro.config.mjs`:
+
+```js
+// astro.config.mjs
+vite: {
+  define: {
+    __APP_VERSION__: JSON.stringify(process.env.npm_package_version),
+  },
+}
+```
+
+Type declared in `src/env.d.ts` as `declare const __APP_VERSION__: string`.
+
+### Environment Variables
+
+Set in `.env` locally, Cloudflare Pages dashboard for production (build-time vars):
+
+| Variable                   | Purpose                          |
+| -------------------------- | -------------------------------- |
+| `PUBLIC_DD_APPLICATION_ID` | RUM application ID               |
+| `PUBLIC_DD_CLIENT_TOKEN`   | Public client token              |
+| `PUBLIC_DD_SITE`           | Datadog site (datadoghq.com)     |
+| `PUBLIC_DD_SERVICE`        | Service name                     |
+| `PUBLIC_DD_ENV`            | Environment (production/staging) |
 
 ## Product Analytics Events
 

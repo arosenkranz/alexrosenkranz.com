@@ -83,7 +83,7 @@ const canonicalURL = new URL(Astro.url.pathname, siteUrl);
         site: import.meta.env.PUBLIC_DD_SITE || 'datadoghq.com',
         service: import.meta.env.PUBLIC_DD_SERVICE || 'alexrosenkranz-web',
         env: import.meta.env.PUBLIC_DD_ENV || 'production',
-        version: import.meta.env.PUBLIC_DD_VERSION || '1.0.0',
+        version: __APP_VERSION__,
         sessionSampleRate: 100,
         sessionReplaySampleRate: 20,
         trackUserInteractions: true,
