@@ -6,10 +6,8 @@ interface Props {
   description?: string;
 }
 
-const {
-  title = 'Alex Rosenkranz',
-  description = 'Personal website and digital garden',
-} = Astro.props;
+const { title = 'Alex Rosenkranz', description = 'Personal website' } =
+  Astro.props;
 
 const siteUrl = 'https://alexrosenkranz.com';
 const canonicalURL = new URL(Astro.url.pathname, siteUrl);
