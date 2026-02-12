@@ -6,10 +6,8 @@ interface Props {
   description?: string;
 }
 
-const {
-  title = 'Alex Rosenkranz',
-  description = 'Personal website and digital garden',
-} = Astro.props;
+const { title = 'Alex Rosenkranz', description = 'Personal website' } =
+  Astro.props;
 
 const siteUrl = 'https://alexrosenkranz.com';
 const canonicalURL = new URL(Astro.url.pathname, siteUrl);
@@ -73,29 +71,25 @@ const canonicalURL = new URL(Astro.url.pathname, siteUrl);
         });
     </script>
 
-    <!--
-      TODO: Datadog RUM Initialization
-      Will be added in later phase with credentials:
+    <!-- Datadog RUM -->
+    <script>
+      import { datadogRum } from '@datadog/browser-rum';
 
-      <script>
-        import { datadogRum } from '@datadog/browser-rum';
-
-        datadogRum.init({
-          applicationId: '<APP_ID>',
-          clientToken: '<CLIENT_TOKEN>',
-          site: 'datadoghq.com',
-          service: 'alexrosenkranz-web',
-          env: 'production',
-          version: '1.0.0',
-          sessionSampleRate: 100,
-          sessionReplaySampleRate: 20,
-          trackUserInteractions: true,
-          trackResources: true,
-          trackLongTasks: true,
-          defaultPrivacyLevel: 'mask-user-input',
-        });
-      </script>
-    -->
+      datadogRum.init({
+        applicationId: import.meta.env.PUBLIC_DD_APPLICATION_ID || '',
+        clientToken: import.meta.env.PUBLIC_DD_CLIENT_TOKEN || '',
+        site: import.meta.env.PUBLIC_DD_SITE || 'datadoghq.com',
+        service: import.meta.env.PUBLIC_DD_SERVICE || 'alexrosenkranz-web',
+        env: import.meta.env.PUBLIC_DD_ENV || 'production',
+        version: __APP_VERSION__,
+        sessionSampleRate: 100,
+        sessionReplaySampleRate: 20,
+        trackUserInteractions: true,
+        trackResources: true,
+        trackLongTasks: true,
+        defaultPrivacyLevel: 'mask-user-input',
+      });
+    </script>
   </head>
   <body class="flex min-h-screen flex-col antialiased">
     <slot />
