@@ -434,16 +434,18 @@ Commit: docs(session): add 2026-02-02 git guardian implementation
 
 ## Integration with Existing Tools
 
-### Works With pre-commit-review Command
+### Works With pre-commit-review Skill
 
-The `/pre-commit-review` command focuses on code quality:
+The `pre-commit-review` skill focuses on code quality while git-guardian focuses on git conventions.
+
+**Code quality checks (pre-commit-review):**
 
 - Console.log statements
 - TODO/FIXME comments
 - Hardcoded values
 - Commented-out code
 
-git-guardian focuses on git conventions:
+**Git convention checks (git-guardian via commit-check):**
 
 - Commit message format
 - AI attribution
@@ -452,8 +454,8 @@ git-guardian focuses on git conventions:
 
 **Use both together:**
 
-1. Run `/pre-commit-review` first (code quality)
-2. Run `/commit-check` second (git conventions)
+1. Say "review my changes" (→ pre-commit-review skill for code quality)
+2. Say "check my commit" (→ commit-check skill for git conventions)
 3. Commit with confidence
 
 ### References git-processes.md

@@ -29,7 +29,7 @@
 - **Deployment:** Live on Cloudflare Pages with GitHub integration
 - **Git Tooling:**
   - Git-guardian agent for commit validation and branching guidance
-  - `/commit-check`, `/pr-ready`, `/branch-decide` commands
+  - `commit-check`, `pr-ready`, `branch-decide`, `pre-commit-review` skills
   - AI attribution blocking enforced at multiple checkpoints
 - **Documentation:**
   - Git processes and workflows documented (`docs/git-processes.md`)
@@ -37,7 +37,7 @@
   - Component patterns guide (`docs/component-patterns.md`)
   - Content authoring guide (`docs/content-authoring.md`)
   - README with project overview
-- **Session Management:** Session continuity with STATUS.md and `/catchup` command
+- **Session Management:** Session continuity with STATUS.md and `catchup` skill
 
 ### What's Coming Soon 🚧
 
@@ -64,7 +64,7 @@
   - Fixed LinkedIn URL, enlarged mark
 - [x] **Git Guardian Agent** (Feb 2 session)
   - Created `git-guardian` agent for commit validation
-  - Added `/commit-check`, `/pr-ready`, `/branch-decide` commands
+  - Added `commit-check`, `pr-ready`, `branch-decide`, `pre-commit-review` skills
   - AI attribution blocking at multiple enforcement points
   - Branching decision matrix (15-minute rule)
 - [x] **Clickable Post Cards** (PR #1)
@@ -81,7 +81,7 @@
   - Maintained existing design system
 - [x] **Session Management System**
   - Added STATUS.md for project state tracking
-  - Created `/catchup` command for quick context loading
+  - Created `catchup` skill for quick context loading
   - Moved session notes to `docs/sessions/` (version controlled)
 - [x] **Documentation**
   - Git processes guide with commit conventions

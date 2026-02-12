@@ -6,7 +6,7 @@ Personal website and digital garden built with Astro, deployed on Cloudflare Pag
 
 **IMPORTANT**: At the start of each session, read `STATUS.md` at project root for current state and next steps.
 
-- **Quick Start:** Run `/catchup` command to read STATUS.md and git status
+- **Quick Start:** Say "catch up on the project" to read STATUS.md and git status
 - **Current Phase:** See STATUS.md for what's complete and what's next
 - **Detailed History:** Session logs in `docs/sessions/` (project-specific, version controlled)
 
@@ -19,11 +19,11 @@ Personal website and digital garden built with Astro, deployed on Cloudflare Pag
 - **Format:** Markdown with frontmatter (date, tags, project, status)
 - **Purpose:** Track development decisions, accomplishments, and learnings per session
 - **Version Control:** Committed to git for project history
-- **Command:** Run `/session-log` at the end of a session to create a curated session note
+- **Skill:** Say "log this session" at the end of a session to create a curated session note
 
 This overrides the global CLAUDE.md instruction to use the Obsidian vault. Session notes for this project stay in the repo.
 
-**When to log:** Any session involving feature work, design decisions, bug fixes with interesting root causes, or architectural changes should get a session note. The Obsidian SessionEnd hook still runs automatically for cross-project logging, but `/session-log` creates the curated, version-controlled record for this project specifically.
+**When to log:** Any session involving feature work, design decisions, bug fixes with interesting root causes, or architectural changes should get a session note. The Obsidian SessionEnd hook still runs automatically for cross-project logging, but the session-log skill creates the curated, version-controlled record for this project specifically.
 
 ## Documentation First
 
@@ -221,44 +221,35 @@ docs(session): add 2026-01-25 session notes
 - NEVER include "Co-Authored-By: Claude" or any AI attribution in commit messages
 - All commits are authored by Alex Rosenkranz alone
 
-### Custom Git Guardian Agent
+### Custom Git Workflow Skills
 
-This project has a custom `git-guardian` agent that proactively enforces git best practices:
+This project has skills that enforce git best practices:
 
-**Available Commands:**
+**Available Skills (auto-trigger or invoke with skill name):**
 
-- `/commit-check` - Validate staged changes and commit message before committing
-- `/pr-ready` - Comprehensive PR readiness check with suggested PR content
-- `/branch-decide` - Interactive helper to decide main vs. feature branch
+- `commit-check` - Validate staged changes and commit message
+- `pr-ready` - Comprehensive PR readiness check
+- `branch-decide` - Decide main vs. feature branch
+- `pre-commit-review` - Code quality review before commit
 
-**What it enforces:**
+**What they enforce:**
 
 - Conventional Commits format validation
 - AI attribution blocking (critical)
 - Branching decision guidance (15-minute rule)
 - PR workflow assistance
+- Code quality checks
 
-**When to use:**
+**Auto-trigger examples:**
 
-1. Before committing: Run `/commit-check` to validate your commit message
-2. Before creating PR: Run `/pr-ready` to review all commits and get PR template
-3. When unsure about branching: Run `/branch-decide` for recommendation
+- "check my commit" → commit-check
+- "ready to create a PR" → pr-ready
+- "should I use a feature branch" → branch-decide
+- "review my changes" → pre-commit-review
 
 **Workflow integration:**
 
-```bash
-# Recommended workflow
-1. Make changes
-2. git add [files]
-3. /pre-commit-review  # Code quality
-4. /commit-check       # Git conventions
-5. git commit -m "type(scope): subject"
-```
-
-The git-guardian agent works alongside `/pre-commit-review`:
-
-- `/pre-commit-review` checks code quality (console.logs, TODOs, etc.)
-- `/commit-check` checks git conventions (commit format, attribution)
+Say "review my changes" first (code quality), then "check my commit" (git conventions), then commit.
 
 ## Important Notes
 
