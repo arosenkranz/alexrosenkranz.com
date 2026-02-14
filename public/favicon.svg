@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <style>
+    text {
+      fill: #1A1A1A;
+      font-family: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
+      font-weight: 500;
+    }
+    @media (prefers-color-scheme: dark) {
+      text {
+        fill: #F2F2F2;
+      }
+    }
+  </style>
+  <text x="50%" y="50%" dominant-baseline="central" text-anchor="middle" font-size="18">/a</text>
+</svg>
