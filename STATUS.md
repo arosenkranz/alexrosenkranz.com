@@ -1,8 +1,8 @@
 # Project Status
 
-**Last Updated:** 2026-02-07
-**Current Phase:** Phase 1 - MVP Deployed ✅ (Redesign Complete)
-**Git Commit:** b56f5b1 (Merge PR #2 - UI Redesign)
+**Last Updated:** 2026-02-15
+**Current Phase:** Phase 1 - MVP Deployed ✅ (v1.1.1)
+**Git Commit:** 3850497 (chore(release): bump to 1.1.1)
 
 ---
 
@@ -37,6 +37,12 @@
   - Component patterns guide (`docs/component-patterns.md`)
   - Content authoring guide (`docs/content-authoring.md`)
   - README with project overview
+- **Favicon & OG Image** (v1.1.0):
+  - SVG favicon (`/a` mark) with dark mode via `prefers-color-scheme`
+  - PNG fallbacks (32x32, 16x16) and apple-touch-icon (180x180)
+  - OG image (1200x630) with `/alex` branding for social sharing
+  - Full `og:image` and `twitter:image` meta tags in BaseLayout
+  - Per-page `image` prop for future article-specific OG images
 - **Session Management:** Session continuity with STATUS.md and `catchup` skill
 
 ### What's Coming Soon 🚧
@@ -54,6 +60,17 @@
 
 ### Recent Accomplishments (Feb 2026)
 
+- [x] **Technical Debt Cleanup** (Feb 15 session)
+  - Updated Husky pre-commit to v9 format (removed legacy `_/husky.sh` sourcing)
+  - Confirmed ESLint flat config already migrated — no action needed
+  - Both tech debt items from Priority 2 resolved
+- [x] **Favicon & OG Image** (Feb 14 session, v1.1.0)
+  - SVG favicon with dark mode, PNG fallbacks, apple-touch-icon
+  - OG image (1200x630) with `/alex` branding
+  - Full meta tags wired in BaseLayout with per-page `image` prop
+- [x] **Command-to-Skill Migration** (Feb 11 session)
+  - Migrated all commands to skills format
+  - Removed deprecated commands directory
 - [x] **UI Redesign** (PR #2, 7 commits)
   - Implemented minimal aesthetic across entire site
   - Expanded to 4-level color hierarchy with refined typography
@@ -116,22 +133,12 @@
   - Update `/about` page with personal content
   - Update `/now` page with current activities
 
-- [ ] **Add Favicon & OG Image**
-  - Create favicon.svg in `public/`
-  - Generate OG image for social sharing
-  - Update BaseLayout.astro with proper meta tags
+- [x] ~~**Add Favicon & OG Image**~~ ✅ Done in v1.1.0
 
 ### Priority 2 (Fix Technical Debt)
 
-- [ ] **Migrate ESLint Config** (if still an issue)
-  - Create `eslint.config.js` (flat config format for ESLint 9)
-  - Remove `.eslintrc.cjs`
-  - Test pre-commit hooks work correctly
-  - **Why:** ESLint 9 requires new format, may cause hook failures
-
-- [ ] **Update Husky Hooks**
-  - Fix deprecation warning in `.husky/pre-commit`
-  - Ensure compatibility with Husky v10.0.0
+- [x] ~~**Migrate ESLint Config**~~ ✅ Already migrated to flat config
+- [x] ~~**Update Husky Hooks**~~ ✅ Fixed in v1.1.1
 
 ---
 
@@ -148,18 +155,6 @@
    - Currently no test suite
    - Should add in Phase 2 (unit tests, integration tests)
    - **Priority:** Low (add when codebase grows)
-
-3. **Husky Deprecation Warning** (possibly resolved)
-   - Husky may show deprecation warning about script format
-   - Will break in v10.0.0
-   - Need to verify and update `.husky/pre-commit` format if needed
-   - **Priority:** Low (only affects future Husky upgrade)
-
-4. **ESLint Config Format** (possibly resolved)
-   - May be using legacy `.eslintrc.cjs` instead of `eslint.config.js`
-   - ESLint 9 requires flat config format
-   - Verify current state and migrate if needed
-   - **Priority:** Low (only if hooks are failing)
 
 ---
 
@@ -194,7 +189,7 @@
 - [ ] Generate OG images dynamically (per page)
 - [ ] Implement image optimization for photo posts
 - [ ] Add Lighthouse CI to GitHub Actions
-- [ ] Create individual post pages (currently just cards)
+- [x] ~~Create individual post pages~~ ✅ Done in PR #1
 
 ---
 
@@ -221,7 +216,7 @@ pnpm deploy:preview   # Deploy to Cloudflare preview
 
 - **Repository:** https://github.com/arosenkranz/alexrosenkranz.com
 - **Local Path:** `/Users/alexrosenkranz/Code/sites/alexrosenkranz.com`
-- **Session Logs:** `~/Documents/main-vault/Sessions/`
+- **Session Logs:** `docs/sessions/`
 - **PRD:** `alexrosenkranz-prd.md` (root of project)
 - **Component Patterns:** `docs/component-patterns.md`
 - **Content Authoring Guide:** `docs/content-authoring.md`
@@ -261,11 +256,9 @@ pnpm deploy:preview   # Deploy to Cloudflare preview
 
 ## Questions for Next Session
 
-- Should we add individual post pages, or keep posts as cards only?
-- What content should go on the homepage vs. /stream page?
 - Should tag filtering use URL params or client-side state?
 - Do we need a search feature for posts?
-- When to add shadcn/ui components and which ones first?
+- What's the priority order for Phase 2 features?
 
 ---
 
