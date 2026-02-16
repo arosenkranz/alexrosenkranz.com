@@ -445,6 +445,79 @@ Use these spacing values consistently:
 
 ---
 
+## Media Embed Components
+
+### MediaEmbed
+
+Auto-embeds media from supported services (Spotify, YouTube, Bandcamp, SoundCloud, Mixcloud).
+
+**Usage:**
+
+```astro
+---
+import MediaEmbed from '@/components/MediaEmbed.astro';
+import { detectEmbedService } from '@/lib/embeds';
+
+const url = 'https://open.spotify.com/track/...';
+const canEmbed = detectEmbedService(url) !== null;
+---
+
+{canEmbed && <MediaEmbed url={url} title="Track Title" />}
+```
+
+**Styling:**
+
+- Full-width container within parent
+- `border-2 border-foreground` - Stark 2px border (matches design system)
+- No rounded corners (flat design)
+- No shadows
+- Service-specific heights (Spotify: 352px, YouTube: 400px, etc.)
+- `loading="lazy"` for performance
+
+**Features:**
+
+- Automatic service detection via regex
+- URL transformation (public → embed URLs)
+- Returns `null` if URL isn't embeddable (caller handles fallback)
+
+---
+
+### AlternateLinks
+
+Renders a list of alternate platform links for multi-platform content.
+
+**Usage:**
+
+```astro
+---
+import AlternateLinks from '@/components/AlternateLinks.astro';
+
+const alternateLinks = {
+  bandcamp: 'https://artist.bandcamp.com/track/...',
+  youtube: 'https://youtube.com/watch?v=...',
+};
+---
+
+{alternateLinks && <AlternateLinks links={alternateLinks} />}
+```
+
+**Styling:**
+
+- Monospace font for service names (`font-mono`)
+- `text-sm uppercase tracking-wide` for section heading
+- `border-t border-foreground-quaternary` for subtle divider
+- Arrow indicator (`→`) for external links
+- Simple hover underline (no transitions)
+- Returns `null` if no links provided
+
+**Behavior:**
+
+- Filters out undefined links automatically
+- Capitalizes service names (e.g., "Spotify", "Bandcamp")
+- Opens links in new tab with `rel="noopener noreferrer"`
+
+---
+
 ## For More Details
 
 - **Design philosophy:** `design-preferences.md`

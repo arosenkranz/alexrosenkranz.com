@@ -12,7 +12,10 @@ const posts = defineCollection({
           'photo',
           'product',
           'code',
+          'tech',
           'music',
+          'track',
+          'playlist',
           'video',
           'quote',
           'note',
@@ -23,6 +26,18 @@ const posts = defineCollection({
         ])
       ),
       url: z.string().url().optional(),
+
+      // Alternate links for additional platforms (music, video, etc.)
+      alternateLinks: z
+        .object({
+          spotify: z.string().url().optional(),
+          bandcamp: z.string().url().optional(),
+          youtube: z.string().url().optional(),
+          soundcloud: z.string().url().optional(),
+          mixcloud: z.string().url().optional(),
+        })
+        .optional(),
+
       image: image().optional(),
       draft: z.boolean().default(false),
     }),

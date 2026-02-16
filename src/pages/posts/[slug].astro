@@ -3,7 +3,10 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
+import MediaEmbed from '@/components/MediaEmbed.astro';
+import AlternateLinks from '@/components/AlternateLinks.astro';
 import { formatDateShort } from '@/lib/utils';
+import { detectEmbedService } from '@/lib/embeds';
 
 export async function getStaticPaths() {
   const posts = await getCollection('posts', ({ data }) => !data.draft);
@@ -14,28 +17,30 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props;
-const { title, publishedAt, tags, url } = post.data;
+const { title, publishedAt, tags, url, alternateLinks } = post.data;
 const { Content } = await post.render();
 const hasBody = post.body && post.body.trim().length > 0;
-const isExternalLink = !!url;
+const canEmbed = url ? detectEmbedService(url) !== null : false;
 ---
 
 <BaseLayout title={title}>
   <Header />
 
-  <main class="mx-auto max-w-2xl flex-1 px-6 py-16 sm:px-8 sm:py-24">
-    <!-- Back link -->
-    <a
-      href="/stream"
-      class="text-foreground-tertiary mb-8 inline-flex items-center gap-2 font-mono text-sm no-underline hover:underline"
-    >
-      <span>&larr;</span>
-      <span>Back to stream</span>
-    </a>
+  <main class="flex-1 px-6 py-16 sm:px-8 sm:py-24">
+    <!-- Back link (outside max-width) -->
+    <div class="mx-auto mb-8 max-w-2xl">
+      <a
+        href="/stream"
+        class="text-foreground-tertiary inline-flex items-center gap-2 font-mono text-sm no-underline hover:underline"
+      >
+        <span>&larr;</span>
+        <span>Back to stream</span>
+      </a>
+    </div>
 
-    <article>
-      <!-- Header -->
-      <header class="mb-8">
+    <article class="mx-auto max-w-4xl">
+      <!-- Header (narrow for readability) -->
+      <header class="mx-auto mb-12 max-w-2xl">
         <time
           datetime={publishedAt.toISOString()}
           class="text-foreground-tertiary mb-2 block font-mono text-sm"
@@ -52,30 +57,46 @@ const isExternalLink = !!url;
         <h1 class="text-foreground text-2xl font-semibold">{title}</h1>
       </header>
 
-      <!-- Main content -->
-      <div class="prose prose-slate dark:prose-invert max-w-none">
-        {hasBody && <Content />}
-      </div>
+      <!-- Embed (full-width within article container) -->
+      {canEmbed && url && <MediaEmbed url={url} title={title} />}
 
-      <!-- External link -->
+      <!-- Prose content (narrow for readability) -->
       {
-        isExternalLink && (
-          <div class="border-foreground-quaternary mt-8 border-t pt-8">
-            <a
-              href={url}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="text-foreground hover:text-foreground inline-flex items-center gap-2 no-underline hover:underline"
-            >
-              <span>View original</span>
-              <span>&rarr;</span>
-            </a>
-            <p class="text-foreground-tertiary mt-1 text-sm">
-              {new URL(url).hostname}
-            </p>
+        hasBody && (
+          <div class="prose prose-slate dark:prose-invert mx-auto mb-8 max-w-2xl">
+            <Content />
           </div>
         )
       }
+
+      <!-- External link fallback (if not embeddable) -->
+      {
+        url && !canEmbed && (
+          <div class="mx-auto max-w-2xl">
+            <div class="border-foreground-quaternary border-t pt-8">
+              <a
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-foreground hover:text-foreground inline-flex items-center gap-2 no-underline hover:underline"
+              >
+                <span>View original</span>
+                <span>&rarr;</span>
+              </a>
+              <p class="text-foreground-tertiary mt-1 text-sm">
+                {new URL(url).hostname}
+              </p>
+            </div>
+          </div>
+        )
+      }
+
+      <!-- Alternate links -->
+      {alternateLinks && (
+        <div class="mx-auto max-w-2xl">
+          <AlternateLinks links={alternateLinks} />
+        </div>
+      )}
     </article>
   </main>
 
