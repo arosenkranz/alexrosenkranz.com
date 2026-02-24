@@ -35,6 +35,7 @@ Current docs:
 - `docs/component-patterns.md` - Reference for component patterns in this project
 - `docs/content-authoring.md` - Reference for writing content
 - `docs/git-processes.md` - Reference for git workflows and commit conventions
+- `docs/frontmatter-template.md` - Reference for frontmatter structure and conventions
 
 ## Commands
 
