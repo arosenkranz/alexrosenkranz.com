@@ -1,7 +1,7 @@
 ---
 name: astro-expert
 description: Use this agent for Astro framework questions, content collections, SSG patterns, and Astro-specific debugging. Invoke when working on .astro files, content collection schemas, or Astro configuration.
-model: sonnet
+model: opus
 tools:
   - Read
   - Grep

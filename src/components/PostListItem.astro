@@ -6,7 +6,11 @@ interface Props {
 }
 
 const { post } = Astro.props;
-const { title, url } = post.data;
+const { title, url, publishedAt } = post.data;
+const date = publishedAt.toLocaleDateString('en-US', {
+  day: '2-digit',
+  month: '2-digit',
+});
 const postUrl = `/posts/${post.slug}`;
 ---
 
@@ -15,6 +19,7 @@ const postUrl = `/posts/${post.slug}`;
     href={postUrl}
     class="text-foreground font-medium no-underline group-hover:underline"
   >
+    <span class="text-foreground-tertiary text-sm">{date}</span>
     {title}
   </a>
   {url && <span class="text-foreground-quaternary ml-1">→</span>}

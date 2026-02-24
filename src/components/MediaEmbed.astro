@@ -1,0 +1,32 @@
+---
+import { detectEmbedService, getEmbedUrl, getEmbedAttrs } from '@/lib/embeds';
+
+interface Props {
+  url: string;
+  title: string;
+}
+
+const { url, title } = Astro.props;
+const service = detectEmbedService(url);
+
+// Return null if not embeddable (caller handles fallback)
+if (!service) {
+  return null;
+}
+
+const embedUrl = getEmbedUrl(url, service);
+const attrs = getEmbedAttrs(service);
+---
+
+<div class="mb-8 w-full">
+  <div class="relative overflow-hidden">
+    <iframe
+      src={embedUrl}
+      title={title}
+      width="100%"
+      class="w-full border-0"
+      style={`height: ${attrs.height}px;`}
+      loading={attrs.loading}
+      allow={attrs.allow}></iframe>
+  </div>
+</div>

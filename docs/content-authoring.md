@@ -89,6 +89,39 @@ Monthly rollups of posts. Usually auto-generated but can be manually curated.
 
 **Filename format:** `YYYY-MM.md` (e.g., `2025-MM.md`)
 
+## Embedding Media
+
+Posts can automatically embed media from supported streaming services using the `url` field.
+
+**Supported Services:**
+- **Spotify**: Tracks, albums, playlists, artists
+- **YouTube**: Videos
+- **Bandcamp**: Albums and tracks
+- **SoundCloud**: Tracks
+- **Mixcloud**: DJ mixes
+
+**Example:**
+
+```yaml
+---
+title: "Favorite Album"
+publishedAt: 2026-02-16
+tags: ["music"]
+url: https://open.spotify.com/album/...
+alternateLinks:
+  bandcamp: https://artist.bandcamp.com/album/...
+  youtube: https://youtube.com/playlist?list=...
+---
+```
+
+The primary `url` embeds automatically if it's from a supported service. If the URL isn't embeddable (e.g., a regular article link), it displays as a "View original" link instead.
+
+**Alternate Links:**
+
+Use `alternateLinks` to provide additional platforms where the content is available. These appear as a simple list below the main embed or content.
+
+Available services: `spotify`, `bandcamp`, `youtube`, `soundcloud`, `mixcloud`
+
 ## Frontmatter Reference
 
 ### Posts
@@ -98,7 +131,13 @@ Monthly rollups of posts. Usually auto-generated but can be manually curated.
 title: string # Required
 publishedAt: datetime # Required, ISO 8601
 tags: string[] # Required, at least one
-url: string # Optional, for link posts
+url: string # Optional, for link posts (auto-embeds if supported service)
+alternateLinks: # Optional, for multi-platform content
+  spotify: string # Optional URL
+  bandcamp: string # Optional URL
+  youtube: string # Optional URL
+  soundcloud: string # Optional URL
+  mixcloud: string # Optional URL
 image: string # Optional, relative path for photos
 draft: boolean # Optional, defaults to false
 ---

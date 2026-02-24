@@ -11,15 +11,14 @@ project: alexrosenkranz.com
 status: complete
 ---
 
-# Minimal-Brutalist UI Redesign
+# UI Redesign
 
 **Date:** February 3-4, 2026 (planned Feb 3, committed Feb 4)
 **Project:** alexrosenkranz.com
-**PR:** #2 (`feat/brutalist-ui-redesign`)
 
 ## Summary
 
-Implemented a comprehensive UI redesign converting the site to a monochrome, brutalist aesthetic. Replaced all color accents with a 4-level grayscale hierarchy, removed all rounded corners and shadows, narrowed prose width to ~650px, and added generous vertical spacing. Created a new `PostListItem` component to replace the card-based layout.
+Implemented a comprehensive UI redesign converting the site to a minimal monochrome aesthetic. Replaced all color accents with a 4-level grayscale hierarchy, removed all rounded corners and shadows, narrowed prose width to ~650px, and added generous vertical spacing. Created a new `PostListItem` component to replace the card-based layout.
 
 ## Accomplishments
 
@@ -39,7 +38,7 @@ Implemented a comprehensive UI redesign converting the site to a monochrome, bru
 
 ### Component Redesign
 
-- Set border radius to 0 globally (completely flat, full brutalist aesthetic)
+- Set border radius to 0 globally 
 - Redesigned Header and Footer with stark borders
 - Created `PostListItem` component replacing card grid with single-column list
 - Changed grid from multi-column to `sm:grid-cols-1`
@@ -49,13 +48,9 @@ Implemented a comprehensive UI redesign converting the site to a monochrome, bru
 ### Pages Updated
 
 - Redesigned all pages: index, stream, about, now, posts/[slug]
-- Consistent brutalist styling across every route
+- Consistent styling across every route
 
 ## Key Decisions
-
-### Full Brutalist Approach
-
-Chose maximum brutalism: Inter + JetBrains Mono fonts (kept), 0px border radius everywhere, no hover effects on cards. This creates the strongest visual identity.
 
 ### Monochrome Only
 

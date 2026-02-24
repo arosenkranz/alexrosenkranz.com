@@ -9,11 +9,12 @@ Quick reference for post frontmatter based on the schema defined in `src/content
 | `title` | string | yes | Post title |
 | `publishedAt` | date | yes | Publication date (YYYY-MM-DD format) |
 | `tags` | array | yes | One or more valid tags |
-| `url` | string | no | External link (must be valid URL) |
+| `url` | string | no | External link (must be valid URL, auto-embeds if supported service) |
+| `alternateLinks` | object | no | Additional platform URLs (spotify, bandcamp, youtube, soundcloud, mixcloud) |
 | `image` | image | no | Relative path to image file |
 | `draft` | boolean | no | Default: false |
 
-**Valid tags:** `article`, `photo`, `product`, `code`, `music`, `video`, `quote`, `note`, `website`, `app`, `movie`, `tv`
+**Valid tags:** `article`, `photo`, `product`, `code`, `tech`, `music`, `track`, `playlist`, `video`, `quote`, `note`, `website`, `app`, `movie`, `tv`
 
 ## Templates
 
@@ -56,6 +57,20 @@ title: ""
 publishedAt: 2026-02-16
 tags: [code, article]
 url: ""
+draft: false
+---
+```
+
+### Music Post with Embed
+```yaml
+---
+title: ""
+publishedAt: 2026-02-16
+tags: [music, track]
+url: https://open.spotify.com/track/...
+alternateLinks:
+  bandcamp: https://artist.bandcamp.com/track/...
+  youtube: https://youtube.com/watch?v=...
 draft: false
 ---
 ```

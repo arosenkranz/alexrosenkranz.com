@@ -27,8 +27,8 @@ Built with Astro and deployed on Cloudflare Pages.
 
 ### Prerequisites
 
-- [Node.js](https://nodejs.org) (v18 or later)
-- [pnpm](https://pnpm.io) (required - do not use npm or yarn)
+- [Node.js](https://nodejs.org)
+- [pnpm](https://pnpm.io)
 
 ### Installation
 
