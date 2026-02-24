@@ -26,9 +26,9 @@ const canEmbed = url ? detectEmbedService(url) !== null : false;
 <BaseLayout title={title}>
   <Header />
 
-  <main class="flex-1 px-6 py-16 sm:px-8 sm:py-24">
+  <main class="flex-1 px-6 py-16 sm:px-8" id="post-content">
     <!-- Back link (outside max-width) -->
-    <div class="mx-auto mb-8 max-w-2xl">
+    <div class="mx-auto mb-8 max-w-2xl px-6 sm:px-8">
       <a
         href="/stream"
         class="text-foreground-tertiary inline-flex items-center gap-2 font-mono text-sm no-underline hover:underline"
@@ -38,12 +38,11 @@ const canEmbed = url ? detectEmbedService(url) !== null : false;
       </a>
     </div>
 
-    <article class="mx-auto max-w-4xl">
-      <!-- Header (narrow for readability) -->
-      <header class="mx-auto mb-12 max-w-2xl">
+    <article class="mx-auto max-w-2xl px-6 sm:px-8">
+      <header class="mb-12">
         <time
           datetime={publishedAt.toISOString()}
-          class="text-foreground-tertiary mb-2 block font-mono text-sm"
+          class="text-foreground-tertiary mb-2 block font-mono"
         >
           {formatDateShort(publishedAt)}
         </time>
@@ -54,16 +53,18 @@ const canEmbed = url ? detectEmbedService(url) !== null : false;
             </p>
           )
         }
-        <h1 class="text-foreground text-2xl font-semibold">{title}</h1>
+        <h1 class="text-foreground text-5xl leading-14 font-semibold">
+          {title}
+        </h1>
       </header>
 
-      <!-- Embed (full-width within article container) -->
+      <!-- Embed -->
       {canEmbed && url && <MediaEmbed url={url} title={title} />}
 
-      <!-- Prose content (narrow for readability) -->
+      <!-- Prose content -->
       {
         hasBody && (
-          <div class="prose prose-slate dark:prose-invert mx-auto mb-8 max-w-2xl">
+          <div class="prose prose-slate dark:prose-invert mx-auto mb-8">
             <Content />
           </div>
         )
@@ -92,11 +93,7 @@ const canEmbed = url ? detectEmbedService(url) !== null : false;
       }
 
       <!-- Alternate links -->
-      {alternateLinks && (
-        <div class="mx-auto max-w-2xl">
-          <AlternateLinks links={alternateLinks} />
-        </div>
-      )}
+      {alternateLinks && <AlternateLinks links={alternateLinks} />}
     </article>
   </main>
 
