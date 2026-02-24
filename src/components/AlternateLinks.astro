@@ -13,7 +13,7 @@ const { links } = Astro.props;
 
 // Filter undefined links and capitalize service names
 const availableLinks = Object.entries(links)
-  .filter(([_, url]) => url !== undefined)
+  .filter(([, url]) => url !== undefined)
   .map(([service, url]) => ({
     service: service.charAt(0).toUpperCase() + service.slice(1),
     url: url as string,
