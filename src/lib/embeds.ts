@@ -3,7 +3,12 @@
  * Handles conversion of public media URLs to embeddable iframe URLs
  */
 
-export type EmbedService = 'spotify' | 'youtube' | 'bandcamp' | 'soundcloud' | 'mixcloud';
+export type EmbedService =
+  | 'spotify'
+  | 'youtube'
+  | 'bandcamp'
+  | 'soundcloud'
+  | 'mixcloud';
 
 /**
  * Detect which embed service a URL belongs to
@@ -12,12 +17,17 @@ export type EmbedService = 'spotify' | 'youtube' | 'bandcamp' | 'soundcloud' | '
  */
 export function detectEmbedService(url: string): EmbedService | null {
   // Spotify: open.spotify.com
-  if (/^https?:\/\/open\.spotify\.com\/(track|album|playlist|artist)\//.test(url)) {
+  if (
+    /^https?:\/\/open\.spotify\.com\/(track|album|playlist|artist)\//.test(url)
+  ) {
     return 'spotify';
   }
 
   // YouTube: youtube.com/watch or youtu.be
-  if (/^https?:\/\/(www\.)?youtube\.com\/watch\?v=/.test(url) || /^https?:\/\/youtu\.be\//.test(url)) {
+  if (
+    /^https?:\/\/(www\.)?youtube\.com\/watch\?v=/.test(url) ||
+    /^https?:\/\/youtu\.be\//.test(url)
+  ) {
     return 'youtube';
   }
 
@@ -50,7 +60,10 @@ export function getEmbedUrl(url: string, service: EmbedService): string {
     case 'spotify': {
       // Convert: https://open.spotify.com/{type}/{id}
       // To: https://open.spotify.com/embed/{type}/{id}
-      return url.replace(/^https?:\/\/open\.spotify\.com\//, 'https://open.spotify.com/embed/');
+      return url.replace(
+        /^https?:\/\/open\.spotify\.com\//,
+        'https://open.spotify.com/embed/'
+      );
     }
 
     case 'youtube': {
@@ -110,7 +123,7 @@ export function getEmbedAttrs(service: EmbedService): {
     case 'spotify':
       return {
         ...baseAttrs,
-        height: 352,
+        height: 152,
         allow: 'encrypted-media',
       };
 
@@ -118,7 +131,8 @@ export function getEmbedAttrs(service: EmbedService): {
       return {
         ...baseAttrs,
         height: 400,
-        allow: 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture',
+        allow:
+          'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture',
       };
 
     case 'bandcamp':

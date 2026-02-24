@@ -19,7 +19,7 @@ const attrs = getEmbedAttrs(service);
 ---
 
 <div class="mb-8 w-full">
-  <div class="border-foreground relative overflow-hidden border-2">
+  <div class="relative overflow-hidden">
     <iframe
       src={embedUrl}
       title={title}
@@ -27,7 +27,6 @@ const attrs = getEmbedAttrs(service);
       class="w-full border-0"
       style={`height: ${attrs.height}px;`}
       loading={attrs.loading}
-      allow={attrs.allow}
-    />
+      allow={attrs.allow}></iframe>
   </div>
 </div>
