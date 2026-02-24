@@ -1,7 +1,7 @@
 {
   "name": "alexrosenkranz",
   "type": "module",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "Personal website and digital garden built with Astro",
   "scripts": {
     "dev": "astro dev",
