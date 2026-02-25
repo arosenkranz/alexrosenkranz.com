@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { datadogRum } from '@datadog/browser-rum';
 
 interface NowPlayingData {
   isPlaying: boolean;
@@ -47,6 +48,14 @@ export default function NowPlaying() {
     );
   }
 
+  const handleTrackClick = () => {
+    datadogRum.addAction('spotify.click', {
+      trackUrl: data.trackUrl,
+      trackTitle: data.title,
+      artist: data.artist,
+    });
+  };
+
   return (
     <div className="flex items-start gap-3">
       {data.albumArt && (
@@ -67,11 +76,8 @@ export default function NowPlaying() {
             href={data.trackUrl}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={handleTrackClick}
             className="text-foreground-secondary font-mono text-sm no-underline hover:underline block truncate"
-            data-now-playing-link
-            data-track-url={data.trackUrl}
-            data-track-title={data.title}
-            data-artist={data.artist}
           >
             {data.title}
           </a>
