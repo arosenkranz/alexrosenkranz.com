@@ -26,9 +26,9 @@
   --muted-foreground: hsl(0 0% 40%); /* Medium gray #666666 */
 
   /* Extended text hierarchy */
-  --foreground-secondary: hsl(0 0% 30%); /* descriptions, body paragraphs */
-  --foreground-tertiary: hsl(0 0% 50%); /* dates, metadata, inactive nav */
-  --foreground-quaternary: hsl(0 0% 65%); /* year headers, placeholders */
+  --foreground-secondary: hsl(0 0% 20%); /* descriptions, body paragraphs */
+  --foreground-tertiary: hsl(0 0% 45%); /* dates, metadata, inactive nav */
+  --foreground-quaternary: hsl(0 0% 60%); /* year headers, placeholders */
 
   /* Accent */
   --accent: hsl(0 0% 96%);
@@ -73,8 +73,8 @@
   --muted-foreground: hsl(0 0% 60%); /* Medium gray #999999 */
 
   /* Extended text hierarchy */
-  --foreground-secondary: hsl(0 0% 75%);
-  --foreground-tertiary: hsl(0 0% 55%);
+  --foreground-secondary: hsl(0 0% 82%);
+  --foreground-tertiary: hsl(0 0% 62%);
   --foreground-quaternary: hsl(0 0% 40%);
 
   /* Accent */
@@ -155,6 +155,7 @@
     background-color: var(--background);
     color: var(--foreground);
     font-family: var(--font-sans);
+    font-size: 1rem; /* fixed 16px base */
     font-feature-settings:
       'rlig' 1,
       'calt' 1;
@@ -173,19 +174,21 @@
   }
 
   h1 {
-    font-size: 1.5rem;
-    line-height: 1.25;
+    font-size: clamp(2rem, 6vw, 2.5rem); /* 32px → 40px — Perfect Fourth */
+    line-height: 1.15;
+    font-weight: 700;
   }
 
   h2 {
-    font-size: 1.25rem;
+    font-size: clamp(1.5rem, 4vw, 1.75rem); /* 24px → 28px */
     line-height: 1.25;
+    font-weight: 600;
   }
 
   h3 {
-    font-size: 1.125rem;
-    line-height: 1.5;
-    font-weight: 500;
+    font-size: clamp(1.125rem, 3vw, 1.3125rem); /* 18px → 21px */
+    line-height: 1.4;
+    font-weight: 600;
   }
 
   p {
@@ -194,26 +197,30 @@
   }
 
   a {
-    color: var(--foreground); /* Same as body text, no color accent */
+    color: var(--foreground);
     text-underline-offset: 4px;
-    text-decoration: none; /* Remove default underline */
+    text-decoration: underline;
+    text-decoration-style: dashed;
     text-decoration-thickness: 1px;
   }
 
   a:hover {
-    text-decoration: underline; /* Simple underline on hover */
+    text-decoration-style: solid;
+    text-decoration-thickness: 2px;
   }
 
-  /* Links inside prose (post body) - always underlined, monochrome */
+  /* Links inside prose (post body) - dashed → solid, monochrome */
   .prose a {
     color: var(--foreground);
     text-decoration: underline;
-    text-underline-offset: 3px;
+    text-decoration-style: dashed;
+    text-underline-offset: 4px;
     text-decoration-thickness: 1px;
   }
 
   .prose a:hover {
-    color: var(--muted-foreground);
+    text-decoration-style: solid;
+    text-decoration-thickness: 2px;
   }
 
   code {
