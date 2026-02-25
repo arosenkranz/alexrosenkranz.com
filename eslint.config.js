@@ -92,4 +92,15 @@ export default [
       '@typescript-eslint/triple-slash-reference': 'off',
     },
   },
+
+  // Node.js scripts (*.mjs in scripts/)
+  {
+    files: ['scripts/**/*.mjs'],
+    languageOptions: {
+      globals: {
+        ...globals.node,
+        ...globals.es2022,
+      },
+    },
+  },
 ];
