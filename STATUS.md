@@ -1,8 +1,8 @@
 # Project Status
 
-**Last Updated:** 2026-02-24
-**Current Phase:** Phase 1 - MVP Deployed ✅ (v1.2.0)
-**Git Commit:** 1452e7d (feat(typography): implement Perfect Fourth scale and label refinement)
+**Last Updated:** 2026-02-25
+**Current Phase:** Phase 2 - Integrations ✅ (v1.3.0)
+**Git Commit:** a40a44f (feat(datadog): add RUM event tracking)
 
 ---
 
@@ -54,20 +54,47 @@
   - `MediaEmbed` component for YouTube/Spotify/SoundCloud embeds
   - `AlternateLinks` component for displaying related links on post detail
 
+- **RSS Feed** (PR #6):
+  - `/rss.xml` endpoint via `@astrojs/rss`
+  - All non-draft posts, sorted by date descending
+  - External link posts use their `url` field; others link to `/posts/[slug]`
+  - Fixes the broken RSS link in the footer
+- **Tag Filtering** (PR #7):
+  - `TagFilter.astro` component with anchor links (`?tag=X`)
+  - Client-side JS shows/hides posts and year sections based on URL param
+  - Works with browser back/forward navigation
+  - Active tag highlighted, all/clear links back to `/stream`
+- **Spotify Now Playing** (PR #8):
+  - Astro API route at `/api/spotify/now-playing` (server-rendered, `prerender = false`)
+  - Exchanges refresh token → access token → currently-playing track
+  - `NowPlaying.tsx` React component polls every 30s, shown in footer
+  - `spotify.click` Datadog RUM event on track link click
+  - Helper script `scripts/get-spotify-token.mjs` for one-time OAuth setup
+- **Datadog RUM Events** (PR #9):
+  - `post.view` on post detail page load
+  - `post.external_link` on "View original" link click
+  - `tag.filter` on `/stream` when a tag param is active
+
 ### What's Coming Soon 🚧
 
 - Digests content collection (monthly rollups)
 - Articles content collection (long-form posts)
-- RSS feeds (all variants)
-- Spotify "Now Playing" integration
-- Datadog RUM observability
-- Tag filtering (UI exists but non-functional)
 
 ---
 
 ## What We Just Completed
 
-### Recent Accomplishments (Feb 2026)
+### Recent Accomplishments (Feb 2026 — Phase 2)
+
+- [x] **RSS Feed** (Feb 25 session, PR #6)
+- [x] **Tag Filtering** (Feb 25 session, PR #7)
+- [x] **Spotify Now Playing** (Feb 25 session, PR #8)
+  - Key debugging: `prerender = false` required for API routes in static builds
+  - Cloudflare secrets accessible via `locals.runtime.env` once route goes through Worker
+- [x] **Datadog RUM Events** (Feb 25 session, PR #9)
+  - `post.view`, `post.external_link`, `tag.filter`, `spotify.click`
+
+### Earlier Accomplishments (Feb 2026)
 
 - [x] **Typography Refinement** (Feb 24 session, PR #5, v1.2.0)
   - Perfect Fourth (1.333x) type scale: h1 32-40px, h2 24-28px, h3 18-21px
@@ -188,21 +215,19 @@
 - [ ] Add articles content collection (long-form posts)
 - [ ] Create digest page routes (`/digests`, `/digests/[slug]`)
 - [ ] Create article page routes (`/writing`, `/writing/[slug]`)
-- [ ] Build RSS feeds (main + per-collection variants)
+- [x] ~~Build RSS feeds~~ ✅ Done (PR #6)
 
 ### Interactivity
 
-- [ ] Add shadcn/ui components
-- [ ] Make tag filtering functional on `/stream`
 - [ ] Add theme toggle component (manual dark/light override)
 - [ ] Add reading time estimates to posts
 
 ### Integrations
 
-- [ ] Build Spotify "Now Playing" Cloudflare Worker
-- [ ] Create NowPlaying.tsx React component
-- [ ] Set up Datadog RUM initialization
-- [ ] Implement Product Analytics event tracking
+- [x] ~~Build Spotify "Now Playing" endpoint~~ ✅ Done (PR #8)
+- [x] ~~Create NowPlaying.tsx React component~~ ✅ Done (PR #8)
+- [x] ~~Set up Datadog RUM initialization~~ ✅ Done (was already initialized)
+- [x] ~~Implement Product Analytics event tracking~~ ✅ Done (PR #9)
 - [ ] Add Cloudflare Worker for digest auto-generation
 
 ### Polish
