@@ -19,7 +19,7 @@ import http from 'node:http';
 
 const CLIENT_ID = process.env.SPOTIFY_CLIENT_ID;
 const CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET;
-const REDIRECT_URI = 'http://localhost:3000/callback';
+const REDIRECT_URI = 'http://127.0.0.1:3000/callback';
 const SCOPE = 'user-read-currently-playing';
 
 if (!CLIENT_ID || !CLIENT_SECRET) {
@@ -45,7 +45,7 @@ console.log('');
 console.log('Waiting for Spotify to redirect back to localhost:3000...');
 
 const server = http.createServer(async (req, res) => {
-  const url = new URL(req.url, `http://localhost:3000`);
+  const url = new URL(req.url, `http://127.0.0.1:3000`);
 
   if (url.pathname !== '/callback') {
     res.writeHead(404);
@@ -107,4 +107,4 @@ const server = http.createServer(async (req, res) => {
   }
 });
 
-server.listen(3000, () => {});
+server.listen(3000, '127.0.0.1', () => {});
