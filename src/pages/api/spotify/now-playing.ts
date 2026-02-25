@@ -1,8 +1,4 @@
-interface Env {
-  SPOTIFY_CLIENT_ID: string;
-  SPOTIFY_CLIENT_SECRET: string;
-  SPOTIFY_REFRESH_TOKEN: string;
-}
+import type { APIContext } from 'astro';
 
 interface SpotifyTokenResponse {
   access_token: string;
@@ -42,11 +38,6 @@ interface NowPlayingData {
   trackUrl?: string;
 }
 
-interface PagesContext {
-  env: Env;
-  request: Request;
-}
-
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Methods': 'GET, OPTIONS',
@@ -62,8 +53,8 @@ function jsonResponse(data: NowPlayingData): Response {
   });
 }
 
-async function getAccessToken(env: Env): Promise<string> {
-  const credentials = btoa(`${env.SPOTIFY_CLIENT_ID}:${env.SPOTIFY_CLIENT_SECRET}`);
+async function getAccessToken(clientId: string, clientSecret: string, refreshToken: string): Promise<string> {
+  const credentials = btoa(`${clientId}:${clientSecret}`);
 
   const response = await fetch('https://accounts.spotify.com/api/token', {
     method: 'POST',
@@ -73,7 +64,7 @@ async function getAccessToken(env: Env): Promise<string> {
     },
     body: new URLSearchParams({
       grant_type: 'refresh_token',
-      refresh_token: env.SPOTIFY_REFRESH_TOKEN,
+      refresh_token: refreshToken,
     }),
   });
 
@@ -85,9 +76,15 @@ async function getAccessToken(env: Env): Promise<string> {
   return data.access_token;
 }
 
-export const onRequestGet = async (context: PagesContext): Promise<Response> => {
+export async function GET({ locals }: APIContext): Promise<Response> {
+  const { SPOTIFY_CLIENT_ID: clientId, SPOTIFY_CLIENT_SECRET: clientSecret, SPOTIFY_REFRESH_TOKEN: refreshToken } = locals.runtime.env;
+
+  if (!clientId || !clientSecret || !refreshToken) {
+    return jsonResponse({ isPlaying: false });
+  }
+
   try {
-    const accessToken = await getAccessToken(context.env);
+    const accessToken = await getAccessToken(clientId, clientSecret, refreshToken);
 
     const response = await fetch(
       'https://api.spotify.com/v1/me/player/currently-playing',
@@ -120,8 +117,8 @@ export const onRequestGet = async (context: PagesContext): Promise<Response> => 
   } catch {
     return jsonResponse({ isPlaying: false });
   }
-};
+}
 
-export const onRequestOptions = async (_context: PagesContext): Promise<Response> => {
+export async function OPTIONS(): Promise<Response> {
   return new Response(null, { headers: corsHeaders });
-};
+}
