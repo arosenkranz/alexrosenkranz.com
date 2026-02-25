@@ -1,8 +1,8 @@
 # Project Status
 
-**Last Updated:** 2026-02-15
-**Current Phase:** Phase 1 - MVP Deployed ✅ (v1.1.1)
-**Git Commit:** 3850497 (chore(release): bump to 1.1.1)
+**Last Updated:** 2026-02-24
+**Current Phase:** Phase 1 - MVP Deployed ✅ (v1.2.0)
+**Git Commit:** 1452e7d (feat(typography): implement Perfect Fourth scale and label refinement)
 
 ---
 
@@ -24,9 +24,9 @@
   - `/about` - Personal bio page
   - `/now` - "Now page" (nownownow.com style)
   - `/posts/[slug]` - Individual post detail pages (clickable cards, PR #1)
-- **Content:** 5 sample posts demonstrating different content types
+- **Content:** Real posts with multi-link schema and media embed support
 - **Build Status:** Passes typecheck, builds successfully
-- **Deployment:** Live on Cloudflare Pages with GitHub integration
+- **Deployment:** Live on Cloudflare Workers with GitHub integration
 - **Git Tooling:**
   - Git-guardian agent for commit validation and branching guidance
   - `commit-check`, `pr-ready`, `branch-decide`, `pre-commit-review` skills
@@ -44,6 +44,15 @@
   - Full `og:image` and `twitter:image` meta tags in BaseLayout
   - Per-page `image` prop for future article-specific OG images
 - **Session Management:** Session continuity with STATUS.md and `catchup` skill
+- **Typography** (v1.2.0, PR #5):
+  - Perfect Fourth (1.333x) type scale for deliberate heading hierarchy
+  - Section labels: sans-serif lowercase with font-medium weight
+  - Dashed underline links (rest) → solid (hover)
+  - Two-row mobile nav with widened active/inactive contrast
+- **Multi-Link Posts** (PR #4):
+  - `alternateLinks` schema field for posts with multiple related URLs
+  - `MediaEmbed` component for YouTube/Spotify/SoundCloud embeds
+  - `AlternateLinks` component for displaying related links on post detail
 
 ### What's Coming Soon 🚧
 
@@ -60,6 +69,18 @@
 
 ### Recent Accomplishments (Feb 2026)
 
+- [x] **Typography Refinement** (Feb 24 session, PR #5, v1.2.0)
+  - Perfect Fourth (1.333x) type scale: h1 32-40px, h2 24-28px, h3 18-21px
+  - Removed hardcoded `text-2xl` overrides on page h1s so global CSS clamp applies
+  - Section labels: dropped `font-mono`, standardized to sans-serif lowercase `text-base font-medium`
+  - Year labels on `/stream` kept mono (numbers in mono is conventional)
+  - Dashed underline links, two-row mobile nav, widened nav contrast
+  - Updated `docs/design-preferences.md` with scale values and decision log
+- [x] **Multi-Link Posts & Embeds** (Feb 22 session, PR #4)
+  - Added `alternateLinks` schema field for posts with multiple related URLs
+  - Built `MediaEmbed.astro` for YouTube/Spotify/SoundCloud iframe embeds
+  - Built `AlternateLinks.astro` for displaying related links on post detail pages
+  - Added frontmatter templates reference doc
 - [x] **Technical Debt Cleanup** (Feb 15 session)
   - Updated Husky pre-commit to v9 format (removed legacy `_/husky.sh` sourcing)
   - Confirmed ESLint flat config already migrated — no action needed
@@ -127,18 +148,19 @@
 
 ### Priority 1 (Content & Polish)
 
-- [ ] **Replace Sample Content**
-  - Delete or update 5 sample posts in `src/content/posts/`
-  - Write first real post
-  - Update `/about` page with personal content
-  - Update `/now` page with current activities
+- [ ] **Continue Adding Real Content**
+  - Write more posts to build out the stream
+  - Flesh out `/about` and `/now` pages with more detail
 
 - [x] ~~**Add Favicon & OG Image**~~ ✅ Done in v1.1.0
+- [x] ~~**Typography Refinement**~~ ✅ Done in v1.2.0 (PR #5)
+- [x] ~~**Multi-Link Posts & Embeds**~~ ✅ Done in PR #4
 
 ### Priority 2 (Fix Technical Debt)
 
 - [x] ~~**Migrate ESLint Config**~~ ✅ Already migrated to flat config
 - [x] ~~**Update Husky Hooks**~~ ✅ Fixed in v1.1.1
+- [x] ~~**Deploy-preview skill**~~ ✅ Fixed for Cloudflare Workers (was Pages)
 
 ---
 
@@ -146,10 +168,10 @@
 
 ### Minor 🔧
 
-1. **Sample Content**
-   - 5 sample posts need replacement with real content
-   - About/now pages have placeholder text
-   - **Priority:** Medium (affects site authenticity)
+1. **Content**
+   - Some sample posts may still need replacement with real content
+   - About/now pages could use more personal detail
+   - **Priority:** Medium (ongoing)
 
 2. **No Tests**
    - Currently no test suite
@@ -232,7 +254,7 @@ pnpm deploy:preview   # Deploy to Cloudflare preview
 - **Styling:** Tailwind CSS 4.x (Vite plugin)
 - **Components:** React 18.x (for future interactivity)
 - **Content:** Astro Content Collections with Zod validation
-- **Hosting:** Cloudflare Pages (connected to GitHub)
+- **Hosting:** Cloudflare Workers (connected to GitHub)
 - **Package Manager:** pnpm
 
 ### Key Files
@@ -247,7 +269,9 @@ pnpm deploy:preview   # Deploy to Cloudflare preview
 
 - **Aesthetic:** Minimal with monochrome palette, stark borders, no shadows
 - **Colors:** 4-level hierarchy via CSS custom properties (light/dark mode)
-- **Fonts:** Sans-serif + monospace from Google Fonts
+- **Typography:** Perfect Fourth (1.333x) scale, sans-serif body + mono accents
+- **Labels:** Sans-serif lowercase `text-base font-medium` (year labels stay mono)
+- **Links:** Dashed underline at rest, solid on hover
 - **Identity:** `/alex` mark with monospace accents
 - **Dark Mode:** Real-time system preference detection
 - **Spacing:** Generous whitespace, narrow prose width (~650px), typography-focused
