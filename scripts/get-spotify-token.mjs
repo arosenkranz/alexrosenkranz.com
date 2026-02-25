@@ -19,6 +19,8 @@ import http from 'node:http';
 
 const CLIENT_ID = process.env.SPOTIFY_CLIENT_ID;
 const CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET;
+// Note: http is intentional here — this is a local-only OAuth callback (127.0.0.1),
+// not a public-facing server. Spotify requires localhost URIs to use http.
 const REDIRECT_URI = 'http://127.0.0.1:3000/callback';
 const SCOPE = 'user-read-currently-playing';
 
@@ -42,10 +44,10 @@ console.log('');
 console.log('Step 2: Open this URL in your browser to authorize:');
 console.log(`  ${authUrl.toString()}`);
 console.log('');
-console.log('Waiting for Spotify to redirect back to localhost:3000...');
+console.log('Waiting for Spotify to redirect back to 127.0.0.1:3000...');
 
 const server = http.createServer(async (req, res) => {
-  const url = new URL(req.url, `http://127.0.0.1:3000`);
+  const url = new URL(req.url, 'http://127.0.0.1:3000');
 
   if (url.pathname !== '/callback') {
     res.writeHead(404);
@@ -107,4 +109,4 @@ const server = http.createServer(async (req, res) => {
   }
 });
 
-server.listen(3000, '127.0.0.1', () => {});
+server.listen(3000, '127.0.0.1');

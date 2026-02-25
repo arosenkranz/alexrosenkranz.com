@@ -10,15 +10,25 @@ interface SpotifyTokenResponse {
   expires_in: number;
 }
 
+interface SpotifyArtist {
+  name: string;
+}
+
+interface SpotifyImage {
+  url: string;
+  width: number;
+  height: number;
+}
+
 interface SpotifyNowPlayingResponse {
   is_playing: boolean;
   item?: {
     name: string;
     external_urls: { spotify: string };
-    artists: Array<{ name: string }>;
+    artists: SpotifyArtist[];
     album: {
       name: string;
-      images: Array<{ url: string; width: number; height: number }>;
+      images: SpotifyImage[];
     };
   };
 }
@@ -30,6 +40,11 @@ interface NowPlayingData {
   album?: string;
   albumArt?: string;
   trackUrl?: string;
+}
+
+interface PagesContext {
+  env: Env;
+  request: Request;
 }
 
 const corsHeaders = {
@@ -70,8 +85,7 @@ async function getAccessToken(env: Env): Promise<string> {
   return data.access_token;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const onRequestGet = async (context: { env: Env; request: Request; [key: string]: any }): Promise<Response> => {
+export const onRequestGet = async (context: PagesContext): Promise<Response> => {
   try {
     const accessToken = await getAccessToken(context.env);
 
@@ -108,7 +122,6 @@ export const onRequestGet = async (context: { env: Env; request: Request; [key: 
   }
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const onRequestOptions = async (_context: any): Promise<Response> => {
+export const onRequestOptions = async (_context: PagesContext): Promise<Response> => {
   return new Response(null, { headers: corsHeaders });
 };
