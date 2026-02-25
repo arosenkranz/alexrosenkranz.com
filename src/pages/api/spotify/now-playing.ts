@@ -78,17 +78,11 @@ async function getAccessToken(clientId: string, clientSecret: string, refreshTok
   return data.access_token;
 }
 
-export async function GET({ locals, url }: APIContext): Promise<Response> {
+export async function GET({ locals }: APIContext): Promise<Response> {
   const { SPOTIFY_CLIENT_ID: clientId, SPOTIFY_CLIENT_SECRET: clientSecret, SPOTIFY_REFRESH_TOKEN: refreshToken } = locals.runtime.env;
-  const debug = url.searchParams.has('debug');
 
   if (!clientId || !clientSecret || !refreshToken) {
-    const missing = ['SPOTIFY_CLIENT_ID', 'SPOTIFY_CLIENT_SECRET', 'SPOTIFY_REFRESH_TOKEN'].filter(
-      (k) => !locals.runtime.env[k as keyof typeof locals.runtime.env]
-    );
-    return new Response(JSON.stringify({ isPlaying: false, error: 'missing_env', missing }), {
-      headers: { 'Content-Type': 'application/json' },
-    });
+    return jsonResponse({ isPlaying: false });
   }
 
   try {
@@ -102,13 +96,6 @@ export async function GET({ locals, url }: APIContext): Promise<Response> {
         },
       }
     );
-
-    if (debug) {
-      const body = response.status !== 204 ? await response.text() : '(no body — 204)';
-      return new Response(JSON.stringify({ status: response.status, body }), {
-        headers: { 'Content-Type': 'application/json' },
-      });
-    }
 
     // 204 means nothing is currently playing
     if (response.status === 204 || !response.ok) {
@@ -129,11 +116,8 @@ export async function GET({ locals, url }: APIContext): Promise<Response> {
       albumArt: data.item.album.images[0]?.url,
       trackUrl: data.item.external_urls.spotify,
     });
-  } catch (err) {
-    const message = err instanceof Error ? err.message : 'unknown error';
-    return new Response(JSON.stringify({ isPlaying: false, error: message }), {
-      headers: { 'Content-Type': 'application/json' },
-    });
+  } catch {
+    return jsonResponse({ isPlaying: false });
   }
 }
 
