@@ -113,6 +113,11 @@ const years = Object.keys(postsByYear)
         link.classList.add('border-border', 'text-foreground-tertiary', 'hover:text-foreground', 'hover:border-foreground-secondary');
       }
     });
+
+    // tag.filter — fire when a tag is active
+    if (activeTag) {
+      window.DD_RUM?.addAction('tag.filter', { tag: activeTag });
+    }
   }
 
   // Run on initial load

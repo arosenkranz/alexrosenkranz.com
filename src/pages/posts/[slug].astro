@@ -76,10 +76,12 @@ const canEmbed = url ? detectEmbedService(url) !== null : false;
           <div class="mx-auto max-w-2xl">
             <div class="border-foreground-quaternary border-t pt-8">
               <a
+                id="post-external-link"
                 href={url}
                 target="_blank"
                 rel="noopener noreferrer"
                 class="text-foreground inline-flex items-center gap-2"
+                data-url={url}
               >
                 <span>View original</span>
                 <span>&rarr;</span>
@@ -99,3 +101,31 @@ const canEmbed = url ? detectEmbedService(url) !== null : false;
 
   <Footer />
 </BaseLayout>
+
+<script
+  is:inline
+  define:vars={{
+    postSlug: post.slug,
+    postTags: tags,
+    postHasUrl: !!url,
+  }}
+>
+  // post.view — fire on page load
+  window.DD_RUM?.addAction('post.view', {
+    slug: postSlug,
+    tags: postTags,
+    hasUrl: postHasUrl,
+  });
+
+  // post.external_link — fire on external link click
+  const externalLink = document.getElementById('post-external-link');
+  if (externalLink) {
+    externalLink.addEventListener('click', () => {
+      const href = externalLink.dataset.url ?? '';
+      window.DD_RUM?.addAction('post.external_link', {
+        url: href,
+        hostname: href ? new URL(href).hostname : '',
+      });
+    });
+  }
+</script>

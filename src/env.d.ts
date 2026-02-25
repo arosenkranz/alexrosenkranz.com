@@ -14,3 +14,9 @@ type Runtime = import('@astrojs/cloudflare').Runtime<CloudflareEnv>;
 declare namespace App {
   interface Locals extends Runtime {}
 }
+
+interface Window {
+  DD_RUM?: {
+    addAction: (name: string, context?: Record<string, unknown>) => void;
+  };
+}
