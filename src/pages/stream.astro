@@ -4,12 +4,16 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
 import PostListItem from '@/components/PostListItem.astro';
+import TagFilter from '@/components/TagFilter.astro';
 
 // Get all posts, filter drafts, and sort by date
 const allPosts = await getCollection('posts');
 const posts = allPosts
   .filter((post) => !post.data.draft)
   .sort((a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime());
+
+// Collect all unique tags from actual posts
+const allTags = [...new Set(posts.flatMap((post) => post.data.tags))].sort();
 
 // Group posts by year
 const postsByYear = posts.reduce<Record<number, typeof posts>>(
@@ -36,7 +40,7 @@ const years = Object.keys(postsByYear)
 
   <main class="mx-auto max-w-2xl flex-1 px-6 py-16 sm:px-8 sm:py-24">
     <!-- Page Header -->
-    <div class="mb-16">
+    <div class="mb-12">
       <h1 class="text-foreground mb-4">
         Stream
       </h1>
@@ -46,17 +50,22 @@ const years = Object.keys(postsByYear)
       </p>
     </div>
 
+    <!-- Tag Filter -->
+    <TagFilter tags={allTags} />
+
     <!-- Posts grouped by year -->
-    <div class="flex flex-col gap-12">
+    <div class="flex flex-col gap-12" id="posts-container">
       {
         years.map((year) => (
-          <section>
+          <section data-year-section>
             <h2 class="text-foreground-tertiary mb-4 font-mono text-base">
               {year}
             </h2>
             <ul class="flex flex-col gap-1">
               {(postsByYear[year] ?? []).map((post) => (
-                <PostListItem post={post} />
+                <li data-tags={post.data.tags.join(',')}>
+                  <PostListItem post={post} />
+                </li>
               ))}
             </ul>
           </section>
@@ -67,3 +76,48 @@ const years = Object.keys(postsByYear)
 
   <Footer />
 </BaseLayout>
+
+<script>
+  function applyTagFilter() {
+    const params = new URLSearchParams(window.location.search);
+    const activeTag = params.get('tag');
+
+    const sections = document.querySelectorAll<HTMLElement>('[data-year-section]');
+
+    sections.forEach((section) => {
+      const items = section.querySelectorAll<HTMLElement>('[data-tags]');
+      let visibleCount = 0;
+
+      items.forEach((item) => {
+        const tags = item.dataset.tags?.split(',') ?? [];
+        const isVisible = !activeTag || tags.includes(activeTag);
+        item.style.display = isVisible ? '' : 'none';
+        if (isVisible) visibleCount++;
+      });
+
+      section.style.display = visibleCount > 0 ? '' : 'none';
+    });
+
+    // Highlight the active tag filter link
+    const tagLinks = document.querySelectorAll<HTMLAnchorElement>('nav[aria-label="Filter posts by tag"] a');
+    tagLinks.forEach((link) => {
+      const url = new URL(link.href);
+      const linkTag = url.searchParams.get('tag');
+      const isActive = activeTag ? linkTag === activeTag : linkTag === null;
+
+      if (isActive) {
+        link.classList.remove('border-border', 'text-foreground-tertiary', 'hover:text-foreground', 'hover:border-foreground-secondary');
+        link.classList.add('border-foreground', 'text-foreground');
+      } else {
+        link.classList.remove('border-foreground', 'text-foreground');
+        link.classList.add('border-border', 'text-foreground-tertiary', 'hover:text-foreground', 'hover:border-foreground-secondary');
+      }
+    });
+  }
+
+  // Run on initial load
+  applyTagFilter();
+
+  // Re-run on browser navigation (back/forward)
+  window.addEventListener('popstate', applyTagFilter);
+</script>

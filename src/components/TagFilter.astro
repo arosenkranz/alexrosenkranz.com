@@ -1,0 +1,39 @@
+---
+interface Props {
+  tags: string[];
+  activeTag?: string | null;
+}
+
+const { tags, activeTag } = Astro.props;
+---
+
+<nav class="mb-12" aria-label="Filter posts by tag">
+  <div class="flex flex-wrap gap-2">
+    <a
+      href="/stream"
+      class:list={[
+        'border px-2 py-0.5 font-mono text-sm no-underline',
+        !activeTag
+          ? 'border-foreground text-foreground'
+          : 'border-border text-foreground-tertiary hover:text-foreground hover:border-foreground-secondary',
+      ]}
+    >
+      all
+    </a>
+    {
+      tags.map((tag) => (
+        <a
+          href={`/stream?tag=${tag}`}
+          class:list={[
+            'border px-2 py-0.5 font-mono text-sm no-underline',
+            activeTag === tag
+              ? 'border-foreground text-foreground'
+              : 'border-border text-foreground-tertiary hover:text-foreground hover:border-foreground-secondary',
+          ]}
+        >
+          {tag}
+        </a>
+      ))
+    }
+  </div>
+</nav>
