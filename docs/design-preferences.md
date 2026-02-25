@@ -1,6 +1,6 @@
 # Design Preferences
 
-**Last Updated:** 2026-02-03
+**Last Updated:** 2026-02-24
 
 This document captures the design aesthetic, visual style, and UI preferences for alexrosenkranz.com. Reference this guide when making UI decisions, adding components, or redesigning layouts.
 
@@ -70,9 +70,15 @@ This document captures the design aesthetic, visual style, and UI preferences fo
 **Typography Hierarchy:**
 
 - Large, bold headings with generous letter-spacing
-- Body text: 1rem (16px) with 1.75-1.85 line-height
-- Fluid type scaling with `clamp()` for responsive sizing
-- Mono font for: code blocks, tags/labels, timestamps, metadata
+- Body text: `1rem` (fixed 16px base)
+- **Perfect Fourth (1.333×) type scale** with `clamp()` for responsive sizing:
+  - h1: `clamp(2rem, 6vw, 2.5rem)` — 32px→40px, weight 700
+  - h2: `clamp(1.5rem, 4vw, 1.75rem)` — 24px→28px, weight 600
+  - h3: `clamp(1.125rem, 3vw, 1.3125rem)` — 18px→21px, weight 600
+  - Post display title: `clamp(2.5rem, 8vw, 3rem)` — larger display scale
+- Mono font for: code blocks, timestamps, metadata, year labels
+- **Section labels:** sans-serif, lowercase, `text-sm` — NOT mono (year labels are the exception)
+- Strong hierarchy: h1 uses font-weight 700, other headings 600
 
 **References:**
 
@@ -132,9 +138,11 @@ This document captures the design aesthetic, visual style, and UI preferences fo
 
 **Links:**
 
-- Simple underline on hover
-- Instant appearance (no transitions)
-- High contrast text color
+- **Dashed underline at rest** → **solid underline on hover** (1px dashed → 2px solid)
+- `text-underline-offset: 4px` for breathing room
+- Same color as surrounding text (monochrome, no accent color)
+- UI/nav links that should NOT have dashed underline: use `no-underline` explicitly
+- Prose links (post body) follow the same dashed→solid pattern via `.prose a` override
 
 **Buttons:**
 
@@ -164,9 +172,10 @@ This document captures the design aesthetic, visual style, and UI preferences fo
 **Approach:**
 
 - Simple, text-based navigation
-- Clear active state (bold or underlined)
-- Sticky header optional
+- **Two-row mobile layout:** logo on top row, nav links below (`flex-col gap-3` on mobile, `sm:flex-row` on desktop)
 - No hamburger menus (show all links)
+- **Active vs inactive contrast:** active = `text-foreground font-semibold underline`; inactive = `text-foreground-quaternary hover:text-foreground-secondary`
+- Widens the perceptual gap using both lightness and font-weight simultaneously
 
 ---
 
@@ -264,6 +273,29 @@ Track design decisions made during implementation:
 - Decided on narrow prose width (~650px)
 - Committed to flat interactive elements
 - Set very generous vertical spacing as standard
+
+**2026-02-24 — Typography & Contrast Pass:**
+
+- Implemented fluid type scale with `clamp()` at every heading level
+- h1 bumped to font-weight 700 (was 600) for stronger hierarchy
+- Links: dashed underline at rest → solid on hover (replaces no-underline at rest)
+- Nav: two-row mobile layout (logo top, links below); active state uses font-semibold
+- Nav contrast widened: active = foreground + semibold, inactive = foreground-quaternary
+- Section labels bumped from `text-foreground-quaternary` → `text-foreground-tertiary`
+
+**2026-02-24 — Typography Refinement (Scale & Labels):**
+
+- Upgraded to **Perfect Fourth (1.333×) type scale** — h1 now 32-40px (was 28-44px), h2 24-28px, h3 18-21px
+- Body text fixed at 1rem (removed subtle clamp that was imperceptible)
+- Removed hardcoded `text-2xl font-semibold` overrides on about/now/stream h1s so global CSS applies
+- Section labels: dropped `font-mono`, standardized to sans-serif lowercase `text-sm`
+- Year labels on `/stream` kept `font-mono` (numbers in mono is conventional) but reduced from `text-xl` to `text-base`
+- "What I'm Up To" → "what i'm up to" (consistent lowercase)
+- Post display title floor raised from 2rem to 2.5rem for stronger presence
+- "see all" link on index dropped `font-mono` to match label treatment
+- Year labels on stream page: quaternary → tertiary
+- Color hierarchy tightened: secondary darker (30%→20% light / 75%→82% dark), tertiary shifted (50%→45% light / 55%→62% dark)
+- Removed explicit `underline` overrides on inline links in about/now/index — global handles it
 
 ---
 

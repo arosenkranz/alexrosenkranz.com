@@ -1,7 +1,7 @@
 ---
 name: pr-ready
 description: Comprehensive pull request readiness check including commit validation, AI attribution scanning, and PR template generation. Use before creating a PR.
-allowed-tools: Read, Bash(git *), Bash(gh pr create *)
+allowed-tools: Read, Bash(git *), Bash(gh pr *)
 ---
 
 # PR Ready Check
@@ -36,7 +36,17 @@ Comprehensive check before creating a pull request.
 
 6. **Execute gh pr create** with agent's suggested command
 
-7. **Monitor preview deployment**
+7. **Check existing PR comments** (if PR already exists)
+
+   ```bash
+   gh pr view [number] --comments
+   ```
+
+   - Review Cloudflare deployment status
+   - Review Datadog CI checks for lint/type errors
+   - Fix any issues before considering the PR ready
+
+8. **Monitor preview deployment**
    - Cloudflare Pages will auto-deploy
    - Check preview URL in GitHub PR
    - Verify CI checks pass
@@ -80,6 +90,12 @@ EOF
 
 ## After PR Creation
 
-1. Wait for CI checks to pass
-2. Review preview deployment
-3. Merge when ready: `gh pr merge --squash`
+1. **Review PR comments** for CI results:
+   ```bash
+   gh pr view [number] --comments
+   ```
+   - Fix any lint/type errors reported by Datadog CI bot
+   - Check Cloudflare deployment status
+2. Wait for all CI checks to pass
+3. Review preview deployment URL
+4. Merge when ready: `gh pr merge --squash`

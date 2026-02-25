@@ -10,7 +10,7 @@ const navItems = [
 
 <header class="bg-background">
   <div class="mx-auto max-w-2xl px-6 pt-8 sm:px-8 sm:pt-12">
-    <nav class="flex items-center justify-between">
+    <nav class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
       <!-- Name -->
       <a href="/" class="text-foreground font-mono text-2xl no-underline">
         /alex
@@ -24,11 +24,11 @@ const navItems = [
               <a
                 href={item.href}
                 class:list={[
-                  'hover:text-foreground font-mono text-sm no-underline hover:underline',
+                  'hover:text-foreground-secondary font-mono text-sm no-underline',
                   currentPath === item.href ||
                   (item.href === '/stream' && currentPath === '/')
-                    ? 'text-foreground font-medium underline'
-                    : 'text-foreground-tertiary',
+                    ? 'text-foreground font-semibold underline'
+                    : 'text-foreground-quaternary hover:text-foreground-secondary',
                 ]}
               >
                 {item.label}

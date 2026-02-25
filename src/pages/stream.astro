@@ -37,7 +37,7 @@ const years = Object.keys(postsByYear)
   <main class="mx-auto max-w-2xl flex-1 px-6 py-16 sm:px-8 sm:py-24">
     <!-- Page Header -->
     <div class="mb-16">
-      <h1 class="text-foreground mb-4 text-2xl font-semibold tracking-tight">
+      <h1 class="text-foreground mb-4">
         Stream
       </h1>
       <p class="text-foreground-secondary leading-relaxed">
@@ -51,7 +51,7 @@ const years = Object.keys(postsByYear)
       {
         years.map((year) => (
           <section>
-            <h2 class="text-foreground-quaternary mb-4 font-mono text-xl">
+            <h2 class="text-foreground-tertiary mb-4 font-mono text-base">
               {year}
             </h2>
             <ul class="flex flex-col gap-1">
