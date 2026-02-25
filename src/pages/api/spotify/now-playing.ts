@@ -1,5 +1,7 @@
 import type { APIContext } from 'astro';
 
+export const prerender = false;
+
 interface SpotifyTokenResponse {
   access_token: string;
   token_type: string;
