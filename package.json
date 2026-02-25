@@ -14,7 +14,8 @@
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "prepare": "husky",
-    "deploy:preview": "pnpm run build && wrangler pages deploy dist"
+    "deploy:preview": "pnpm run build && wrangler pages deploy dist",
+    "spotify:token": "node scripts/get-spotify-token.mjs"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
