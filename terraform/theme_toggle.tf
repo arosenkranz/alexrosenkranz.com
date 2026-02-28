@@ -53,6 +53,8 @@ resource "datadog_synthetics_test" "theme_toggle" {
     }
   }
 
+  device_ids = ["chrome.laptop_large"]
+
   locations = ["aws:us-east-1"]
 
   options_list {

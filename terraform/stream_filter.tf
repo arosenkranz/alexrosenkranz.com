@@ -68,6 +68,8 @@ resource "datadog_synthetics_test" "stream_filter" {
     }
   }
 
+  device_ids = ["chrome.laptop_large"]
+
   locations = ["aws:us-east-1"]
 
   options_list {
