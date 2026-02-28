@@ -1,0 +1,8 @@
+tests:
+  # Spotify API — now-playing endpoint (created via terraform apply)
+  - id: s9g-buz-32a
+
+  # Browser tests — to be added after recording in Datadog UI:
+  # - id: <homepage-test-id>
+  # - id: <theme-toggle-test-id>
+  # - id: <stream-filter-test-id>

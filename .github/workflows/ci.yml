@@ -52,3 +52,19 @@ jobs:
       - name: Terraform Validate
         run: terraform validate
         working-directory: terraform
+
+  synthetics:
+    name: Datadog Synthetics
+    runs-on: ubuntu-latest
+    needs: lint-and-typecheck
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Run Synthetics tests
+        run: npx @datadog/datadog-ci synthetics run-tests
+        env:
+          DATADOG_API_KEY: ${{ secrets.DATADOG_API_KEY }}
+          DATADOG_APP_KEY: ${{ secrets.DATADOG_APP_KEY }}
+          DATADOG_SITE: datadoghq.com
