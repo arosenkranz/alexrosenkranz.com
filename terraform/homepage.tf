@@ -60,8 +60,7 @@ resource "datadog_synthetics_test" "homepage" {
   locations = ["aws:us-east-1"]
 
   options_list {
-    tick_every            = 3600
-    screenshot_on_failure = true
+    tick_every = 3600
   }
 
   tags = ["site:alexrosenkranz", "env:production"]
