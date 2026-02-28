@@ -1,4 +1,6 @@
 ---
+import ThemeToggle from './ThemeToggle.astro';
+
 const currentPath = Astro.url.pathname;
 
 const navItems = [
@@ -36,6 +38,7 @@ const navItems = [
             </li>
           ))
         }
+        <li><ThemeToggle /></li>
       </ul>
     </nav>
   </div>

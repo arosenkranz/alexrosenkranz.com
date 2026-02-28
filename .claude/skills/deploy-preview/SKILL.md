@@ -1,58 +1,49 @@
 ---
 name: deploy-preview
-description: Run quality checks (typecheck, lint, build) and deploy to Cloudflare Workers preview environment. Use when testing changes in a preview environment.
-allowed-tools: Bash(pnpm typecheck), Bash(pnpm lint), Bash(pnpm build), Bash(pnpm wrangler *)
+description: Run quality checks locally before pushing. Preview deployments are handled automatically by Cloudflare's git integration on PR open/push — do not deploy locally.
+allowed-tools: Bash(pnpm typecheck), Bash(pnpm lint), Bash(pnpm build)
 ---
 
-# Deploy to Preview
+# Deploy Preview
 
-Run quality checks and deploy to Cloudflare Workers preview environment.
+Preview deployments are handled automatically by Cloudflare's git integration — **do not run `wrangler deploy` locally**.
 
-## IMPORTANT: This is a Cloudflare Workers project, NOT Cloudflare Pages
+## Why Not Deploy Locally?
 
-**NEVER use `wrangler pages deploy`** — this will always fail with "Project not found".
+Local `wrangler deploy` creates a separate disconnected worker outside of Cloudflare's git integration. It won't share env vars, bindings, or the same worker config as the git-connected deployment.
 
-The site uses Cloudflare Workers with static assets (required for Spotify API proxy and other Worker functions). The `wrangler.jsonc` config uses `assets.directory` (Workers Assets), not `pages_build_output_dir` (Pages).
+## Correct Workflow
 
-## Steps
-
-1. Run type checking:
+1. Run quality checks locally:
 
    ```bash
    pnpm typecheck
    ```
 
-   If this fails, stop and report the errors.
-
-2. Run linting:
+   Stop and report any errors.
 
    ```bash
    pnpm lint
    ```
 
-   If this fails, stop and report the errors.
-
-3. Run production build:
+   Stop and report any errors.
 
    ```bash
    pnpm build
    ```
 
-   If this fails, stop and report the errors.
+   Stop and report any errors.
 
-4. Deploy to preview (Cloudflare Workers):
+2. Push to a feature branch and open a PR:
 
    ```bash
-   pnpm wrangler deploy --env preview
+   gh pr create
    ```
 
-   This deploys to `alexrosenkranz-preview.alex-rosenkranz.workers.dev`.
-
-5. Report the preview URL from the deployment output.
+3. Cloudflare automatically builds and deploys a preview URL, visible in the PR checks on GitHub.
 
 ## Notes
 
-- This does NOT deploy to production
-- Preview worker URL: `https://alexrosenkranz-preview.alex-rosenkranz.workers.dev`
-- Production worker: deployed automatically when `main` branch is pushed via GitHub Actions
-- The `--env preview` flag maps to the `alexrosenkranz-preview` worker name in `wrangler.jsonc`
+- **Never run `wrangler deploy` locally for previews** — creates a rogue worker disconnected from git integration
+- Production deploys automatically when `main` is pushed via GitHub Actions
+- `wrangler.jsonc` has no `env.preview` block intentionally — previews go through git, not local CLI

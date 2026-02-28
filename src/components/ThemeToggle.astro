@@ -1,0 +1,38 @@
+---
+---
+
+<button
+  id="theme-toggle"
+  aria-label="Toggle theme"
+  class="cursor-pointer text-foreground-quaternary hover:text-foreground-secondary"
+>
+  <!-- Sun icon: shown when dark (click to switch to light) -->
+  <span id="icon-sun" class="hidden font-mono text-sm">☀</span>
+  <!-- Moon icon: shown when light (click to switch to dark) -->
+  <span id="icon-moon" class="font-mono text-sm">☾</span>
+</button>
+
+<script>
+  const btn = document.getElementById('theme-toggle');
+  const iconSun = document.getElementById('icon-sun');
+  const iconMoon = document.getElementById('icon-moon');
+
+  function syncIcon() {
+    const isDark = document.documentElement.classList.contains('dark');
+    iconSun?.classList.toggle('hidden', !isDark);
+    iconMoon?.classList.toggle('hidden', isDark);
+  }
+
+  syncIcon();
+
+  btn?.addEventListener('click', () => {
+    const isDark = document.documentElement.classList.toggle('dark');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    syncIcon();
+
+    // Datadog RUM event
+    if (typeof window !== 'undefined' && 'DD_RUM' in window) {
+      (window as { DD_RUM?: { addAction: (name: string, context?: object) => void } }).DD_RUM?.addAction('theme.toggle', { theme: isDark ? 'dark' : 'light' });
+    }
+  });
+</script>
