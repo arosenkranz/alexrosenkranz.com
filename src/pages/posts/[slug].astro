@@ -5,8 +5,11 @@ import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
 import MediaEmbed from '@/components/MediaEmbed.astro';
 import AlternateLinks from '@/components/AlternateLinks.astro';
+import JsonLd from '@/components/JsonLd.astro';
 import { formatDateShort } from '@/lib/utils';
 import { detectEmbedService } from '@/lib/embeds';
+import { SITE_CONFIG } from '@/lib/site-config';
+import { buildArticleSchema, buildBreadcrumbSchema } from '@/lib/seo';
 
 export async function getStaticPaths() {
   const posts = await getCollection('posts', ({ data }) => !data.draft);
@@ -17,13 +20,34 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props;
-const { title, publishedAt, tags, url, alternateLinks } = post.data;
+const { title, description, publishedAt, tags, url, alternateLinks, image } = post.data;
 const { Content } = await post.render();
 const hasBody = post.body && post.body.trim().length > 0;
 const canEmbed = url ? detectEmbedService(url) !== null : false;
 ---
 
-<BaseLayout title={title}>
+<BaseLayout
+  title={title}
+  description={description ?? title}
+  image={image?.src}
+  type="article"
+  publishedAt={publishedAt}
+>
+  <JsonLd schemas={[
+    buildArticleSchema({
+      title,
+      description: description ?? title,
+      url: `${SITE_CONFIG.url}/posts/${post.slug}`,
+      datePublished: publishedAt,
+      image: image?.src ? `${SITE_CONFIG.url}${image.src}` : undefined,
+      author: SITE_CONFIG.author,
+    }),
+    buildBreadcrumbSchema([
+      { name: 'Home', url: SITE_CONFIG.url },
+      { name: 'Stream', url: `${SITE_CONFIG.url}/stream` },
+      { name: title, url: `${SITE_CONFIG.url}/posts/${post.slug}` },
+    ]),
+  ]} />
   <Header />
 
   <main class="flex-1 px-6 py-16 sm:px-8" id="post-content">
