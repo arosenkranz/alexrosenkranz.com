@@ -85,6 +85,14 @@ export default [
     },
   },
 
+  // JsonLd.astro uses set:html intentionally with server-controlled data only
+  {
+    files: ['src/components/JsonLd.astro'],
+    rules: {
+      'astro/no-set-html-directive': 'off',
+    },
+  },
+
   // TypeScript declaration files - override to allow triple-slash references
   {
     files: ['**/*.d.ts'],

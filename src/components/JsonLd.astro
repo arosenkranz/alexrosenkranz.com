@@ -1,0 +1,9 @@
+---
+interface Props {
+  schemas: object[];
+}
+
+const { schemas } = Astro.props;
+---
+
+<script is:inline type="application/ld+json" set:html={JSON.stringify(schemas.length === 1 ? schemas[0] : schemas)} />

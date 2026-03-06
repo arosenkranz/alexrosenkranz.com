@@ -1,20 +1,24 @@
 ---
 import '@/styles/globals.css';
+import { SITE_CONFIG } from '@/lib/site-config';
 
 interface Props {
   title?: string;
   description?: string;
   image?: string;
+  type?: 'website' | 'article';
+  publishedAt?: Date;
 }
 
 const {
-  title = 'Alex Rosenkranz',
-  description = 'Personal website',
-  image = '/og-image.png',
+  title = SITE_CONFIG.name,
+  description = SITE_CONFIG.description,
+  image = SITE_CONFIG.defaultImage,
+  type = 'website',
+  publishedAt,
 } = Astro.props;
 
-const siteUrl = 'https://alexrosenkranz.com';
-const canonicalURL = new URL(Astro.url.pathname, siteUrl);
+const canonicalURL = new URL(Astro.url.pathname, SITE_CONFIG.url);
 ---
 
 <!doctype html>
@@ -35,21 +39,28 @@ const canonicalURL = new URL(Astro.url.pathname, siteUrl);
     <link rel="canonical" href={canonicalURL} />
 
     <!-- Open Graph -->
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={type} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalURL} />
-    <meta property="og:site_name" content="Alex Rosenkranz" />
-    <meta property="og:image" content={`${siteUrl}${image}`} />
+    <meta property="og:site_name" content={SITE_CONFIG.name} />
+    <meta property="og:image" content={`${SITE_CONFIG.url}${image}`} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content={title} />
+    <meta property="og:locale" content={SITE_CONFIG.locale} />
+    {type === 'article' && publishedAt && (
+      <meta property="article:published_time" content={publishedAt.toISOString()} />
+    )}
+    {type === 'article' && (
+      <meta property="article:author" content={SITE_CONFIG.author.url} />
+    )}
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={`${siteUrl}${image}`} />
+    <meta name="twitter:image" content={`${SITE_CONFIG.url}${image}`} />
     <meta name="twitter:image:alt" content={title} />
 
     <!-- Fonts -->

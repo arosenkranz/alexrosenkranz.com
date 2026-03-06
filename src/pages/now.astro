@@ -2,11 +2,20 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
+import JsonLd from '@/components/JsonLd.astro';
+import { SITE_CONFIG } from '@/lib/site-config';
+import { buildBreadcrumbSchema } from '@/lib/seo';
 
 const lastUpdated = 'February 23, 2026';
 ---
 
 <BaseLayout title="Now - Alex Rosenkranz" description="What I'm up to lately.">
+  <JsonLd schemas={[
+    buildBreadcrumbSchema([
+      { name: 'Home', url: SITE_CONFIG.url },
+      { name: 'Now', url: `${SITE_CONFIG.url}/now` },
+    ]),
+  ]} />
   <Header />
 
   <main class="mx-auto max-w-2xl flex-1 px-6 py-16 sm:px-8 sm:py-24">
