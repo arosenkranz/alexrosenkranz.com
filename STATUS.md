@@ -1,8 +1,8 @@
 # Project Status
 
-**Last Updated:** 2026-02-25
-**Current Phase:** Phase 2 - Integrations ✅ (v1.3.0)
-**Git Commit:** a40a44f (feat(datadog): add RUM event tracking)
+**Last Updated:** 2026-03-05
+**Current Phase:** Phase 2 - SEO Polish ✅ (v1.4.0)
+**Git Commit:** 4c27e33 (feat(seo): structured data, sitemap, robots.txt, improved OG tags)
 
 ---
 
@@ -74,6 +74,17 @@
   - `post.view` on post detail page load
   - `post.external_link` on "View original" link click
   - `tag.filter` on `/stream` when a tag param is active
+
+- **SEO Polish** (PR #12, v1.4.0):
+  - `SITE_CONFIG` constant centralizing all site metadata
+  - JSON-LD structured data on all pages (WebSite, Person, BlogPosting, BreadcrumbList)
+  - `@astrojs/sitemap` integration generating `sitemap-index.xml`
+  - `public/robots.txt` pointing crawlers to sitemap
+  - `BaseLayout` expanded with `type` and `publishedAt` props
+  - `og:type="article"` + `article:published_time` + `article:author` on post pages
+  - `og:locale` added to all pages
+  - Optional `description` field in post schema; RSS uses `description ?? title`
+- **Datadog Synthetics** (PR #11)
 
 ### What's Coming Soon 🚧
 
@@ -232,7 +243,7 @@
 
 ### Polish
 
-- [ ] Add structured data (JSON-LD) for SEO
+- [x] ~~Add structured data (JSON-LD) for SEO~~ ✅ Done (PR #12)
 - [ ] Generate OG images dynamically (per page)
 - [ ] Implement image optimization for photo posts
 - [ ] Add Lighthouse CI to GitHub Actions
