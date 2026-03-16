@@ -21,10 +21,12 @@ const latestPosts = posts.slice(0, 5);
   title="Alex Rosenkranz"
   description="Personal website and digital garden."
 >
-  <JsonLd schemas={[
-    buildWebSiteSchema(SITE_CONFIG),
-    buildBreadcrumbSchema([{ name: 'Home', url: SITE_CONFIG.url }]),
-  ]} />
+  <JsonLd
+    schemas={[
+      buildWebSiteSchema(SITE_CONFIG),
+      buildBreadcrumbSchema([{ name: 'Home', url: SITE_CONFIG.url }]),
+    ]}
+  />
   <Header />
 
   <main class="mx-auto max-w-2xl flex-1 px-6 py-16 sm:px-8 sm:py-24">
@@ -37,7 +39,7 @@ const latestPosts = posts.slice(0, 5);
           href="https://learn.datadoghq.com"
           target="_blank"
           rel="noopener noreferrer"
-          >Customer Education &amp; Training team at Datadog.</a
+          >Customer Education &amp; Training team at Datadog</a
         >. This is my corner of the internet to share things I'm into, working
         on, learning, and doing with my life.
       </p>
