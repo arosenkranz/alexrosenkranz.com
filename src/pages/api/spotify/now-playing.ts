@@ -50,7 +50,7 @@ function jsonResponse(data: NowPlayingData): Response {
     headers: {
       ...corsHeaders,
       'Content-Type': 'application/json',
-      'Cache-Control': 'public, max-age=30',
+      'Cache-Control': 'no-store',
     },
   });
 }
