@@ -1,6 +1,6 @@
 # alexrosenkranz.com
 
-Personal website and digital garden built with Astro, deployed on Cloudflare Pages.
+Personal website and digital garden built with Astro, deployed on Cloudflare Workers.
 
 ## Session Continuity
 
@@ -35,7 +35,7 @@ Current docs:
 - `docs/component-patterns.md` - Reference for component patterns in this project
 - `docs/content-authoring.md` - Reference for writing content
 - `docs/git-processes.md` - Reference for git workflows and commit conventions
-- `docs/frontmatter-template.md` - Reference for frontmatter structure and conventions
+- `docs/frontmatter-templates.md` - Reference for frontmatter structure and conventions
 
 ## Commands
 
@@ -69,7 +69,6 @@ pnpm deploy:preview   # Deploy to Cloudflare preview
 ```
 src/
 ├── components/
-│   ├── ui/           # shadcn/ui components (don't modify directly)
 │   ├── *.astro       # Astro components
 │   └── *.tsx         # React components (for interactivity)
 ├── content/

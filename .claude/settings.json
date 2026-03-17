@@ -1,17 +1,5 @@
 {
   "permissions": {
-    "allowedTools": [
-      "Read",
-      "Write",
-      "Edit",
-      "Bash(pnpm *)",
-      "Bash(git *)",
-      "Bash(wrangler *)",
-      "Bash(npx *)",
-      "Bash(curl *)",
-      "Glob",
-      "Grep"
-    ],
     "deny": [
       "Read(.env)",
       "Read(.env.*)",
