@@ -13,5 +13,5 @@ variable "datadog_app_key" {
 variable "site_url" {
   description = "Base URL of the site under test"
   type        = string
-  default     = "https://alexrosenkranz.alex-rosenkranz.workers.dev"
+  default     = "https://alexrosenkranz.com"
 }
